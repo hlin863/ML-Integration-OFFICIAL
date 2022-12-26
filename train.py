@@ -38,6 +38,93 @@ X_test = X[int(0.8*len(X)):]
 
 y_test = y[int(0.8*len(y)):]
 
+# implement linear regression without sklearn library
+class LinearRegression:
+
+    def __init__(self, X, y):
+        """
+        
+        Initialises the linear regression model by assigning the training data to the external parameters X and y.
+
+        @param X: The training data
+        @param y: The training labels
+
+        """
+        self.X = X
+        self.y = y
+        self.X_bar = self.meanX()
+        self.Y_bar = self.meanY()
+
+    def meanX(self):
+        """
+        
+        Calculates the mean for the training data.
+
+        @return: The mean of the training labels. 
+        
+        """
+        return np.mean(self.X)
+    
+    def meanY(self):
+        """
+        
+        Calculates the mean for the training labels.
+
+        @return: The mean of the training labels.
+        
+        """
+
+        return np.mean(self.y)
+
+    def calculate_gradient(self):
+
+        """
+        
+        This function calculates the gradient for the linear regression function.
+
+        @return: The gradient of the linear regression function.
+
+        """
+
+        gradient = 0 # initialise gradient
+
+        for i in range(len(self.X)): # for each data point
+
+            gradient += (self.X[i] - self.X_bar) * (self.y[i] - self.Y_bar) / (self.X[i] - self.X_bar) ** 2 # gradient = (x - x^-) * (y - y^-) / (x - x^-) ** 2
+
+        return gradient # return the gradient from the function. 
+    
+    def calculate_intercept(self):
+
+        """
+        
+        Implement a function to calculate the y-intercept. 
+        
+        @return: The y-intercept of the linear regression function.
+
+        """
+        c = self.Y_bar = self.calculate_gradient() * self.X_bar # y-intercept = y^- - gradient * x^-
+
+        return c # return the y-intercept from the function.
+        
+    def linear_regression(self, x_test):
+
+        """
+        
+        Implements the linear regression function on the test data.
+
+        @param x_test: The test data.
+        
+        """
+
+        y_pred = []
+
+        for i in range(len(x_test)): # for each data point
+
+            y_pred.append(self.calculate_gradient() * x_test[i] + self.calculate_intercept()) # y = gradient * x + y-intercept
+
+        return y_pred # return the predicted values from the function.
+
 # #################################
 # ########## MODELLING ############
 # #################################
