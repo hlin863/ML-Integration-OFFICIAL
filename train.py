@@ -1,5 +1,6 @@
 import pandas as pd 
-# from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestRegressor
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -124,6 +125,45 @@ class LinearRegression:
             y_pred.append(self.calculate_gradient() * x_test[i] + self.calculate_intercept()) # y = gradient * x + y-intercept
 
         return y_pred # return the predicted values from the function.
+
+    def score(self, y_test, y_pred):
+
+        """
+        
+        Calculates the R^2 score for the linear regression model.
+
+        @param y_test: The test labels.
+
+        @param y_pred: The predicted labels.
+
+        @return: The R^2 score for the linear regression model.
+        
+        """
+
+        y_bar = np.mean(y_test)
+
+        predicted_value = 0
+
+        for i in range(len(y_test)):
+
+            predicted_value += (y_pred[i] - y_bar) ** 2 / (y_test[i] - y_bar) ** 2
+
+        return predicted_value
+
+# create an instance of the linear regression class
+linear_regression = LinearRegression(X_train, y_train)
+
+# calculate the gradient
+gradient = linear_regression.calculate_gradient()
+
+# calculate the y-intercept
+intercept = linear_regression.calculate_intercept()
+
+y_pred = linear_regression.linear_regression(X_test)
+
+score = linear_regression.score(y_test, y_pred)
+
+print("The linear regression model has a score of: ", score)
 
 # #################################
 # ########## MODELLING ############
