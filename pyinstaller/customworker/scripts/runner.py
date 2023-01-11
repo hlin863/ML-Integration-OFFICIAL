@@ -1,4 +1,5 @@
 from twisted.python import usage
+from twisted.python import reflect
 import sys
 
 class Options(usage.Options):
@@ -34,4 +35,6 @@ def run():
         print(str(c))
         sys.exit(1)
 
-    print("Hello world")
+    subConfig = config.subOptions
+    subCommandFunction = reflect.namedObject(subConfig.subcommandFunction)
+    sys.exit(subCommandFunction(subConfig))
