@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html lang="en-gb">
 <head>
-    
+    <!-- <script src="upload.js"></script> -->
 </head>
 <body>
     <h1>This section is for building the CI application</h1>
+
+    <p>Click on the "Choose File" button to upload a file:</p>
+
+    <form action="action_page.php" method="post" enctype="multipart/form-data">
+        File: <input type="file" name="file"/> 
+        <input type="submit" value="Upload" />
+    </form>
+
+    <!-- <form action="/action_page.php">
+        <input type="file" id="test-code-upload" name="filename" accept=".py">
+        <input type="submit" onclick="uploadTestCode()">
+    </form> -->
+
 </body>
 </html>
