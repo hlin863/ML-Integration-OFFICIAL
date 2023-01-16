@@ -9,3 +9,7 @@ function pending_function(){
 function cancel_function(){
     console.log("This is a cancel function.");
 }
+
+function worker_function(){
+    console.log("This is a worker function.");
+}
