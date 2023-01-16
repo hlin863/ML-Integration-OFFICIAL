@@ -1,4 +1,10 @@
 function build_function(){
+    $.ajax({
+        url: "test.py",
+        success: function(result){
+            console.log(result);
+        }
+    });
     console.log("This is a build function.");
 }
 
