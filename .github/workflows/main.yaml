@@ -24,7 +24,7 @@ jobs:
 
           cml-send-comment report.md
 
-  win:
-  # determines the platform for the application.
-    name: Win / python ${{ matrix.python-version }}
-    runs-on: windows-latest
+  # win:
+  # # determines the platform for the application.
+  #   name: Win / python ${{ matrix.python-version }}
+  #   runs-on: windows-latest
