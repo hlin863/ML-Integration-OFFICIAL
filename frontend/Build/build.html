@@ -7,6 +7,8 @@
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 </head>
 <body>
+    <py-script src="JS/test.py"></py-script>
+    
     <h1>This section is for building the CI application</h1>
 
     <p>Click on the "Choose File" button to upload a file:</p>
@@ -48,10 +50,11 @@
       </table>
     
       <!-- section to test the function calculating the sum of the values 10 and 5 -->
-    <div class="col-3">
+    <div class="col-4">
       <button type="button" class="btn btn-outline-success" id = "arg-1">10</button>
       <button type="button" class="btn btn-outline-success" id = "arg-2">5</button>
       <button type="button" class="btn btn-outline-success" id="add-result"></button>
+      <button type="button" class="btn btn-outline-success" id="product-result"></button>
     </div>
 
     <div class="col-4">
@@ -65,6 +68,12 @@
         <input type="file" id="test-code-upload" name="filename" accept=".py">
         <input type="submit" onclick="uploadTestCode()">
     </form> -->
+
+    <py-repl>
+
+      <!-- provides a platform to run the external python scripts. -->
+        
+    </py-repl>
 
     
     <py-script>
