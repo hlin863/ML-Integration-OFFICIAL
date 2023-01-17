@@ -4,10 +4,22 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src = "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
     <script type = "text/javascript" src="JS/button.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css"/>
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <py-env>
+      - numpy
+      - pandas
+      - matplotlib
+      - scikit-learn
+      - seaborn
+    </py-env>
+
 </head>
+
 <body>
     <py-script src="JS/test.py"></py-script>
+    <py-script src="JS/train.py"></py-script>
     
     <h1>This section is for building the CI application</h1>
 
