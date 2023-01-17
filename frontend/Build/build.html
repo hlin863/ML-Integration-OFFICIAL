@@ -4,6 +4,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <script src = "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
     <script type = "text/javascript" src="JS/button.js"></script>
+    <script type = "text/javascript" src="JS/table.js"></script>
     <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css"/>
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 
@@ -33,13 +34,13 @@
         <input type="submit" value="Upload" />
     </form>
 
-    <table class="table table-striped">
+    <table class="table table-striped" id = "ci-result-table">
         <thead>
           <tr>
-            <th scope="col">Name</th>
-            <th scope="col">Start Time</th>
-            <th scope="col">Finish Time</th>
-            <th scope="col">Handle</th>
+            <th scope="col" id = "name-heading">Name</th>
+            <th scope="col" id = "start-time-heading">Start Time</th>
+            <th scope="col" id = "finish-time-heading">Finish Time</th>
+            <th scope="col" id = "handle-heading">Handle</th>
           </tr>
         </thead>
         <tbody>
@@ -72,11 +73,12 @@
       <button type="button" class="btn btn-outline-success" id="product-result"></button>
     </div>
 
-    <div class="col-4">
+    <div class="col-5">
         <button type="button" class="btn btn-block btn-primary text-white" id = "builder-button">Builders</button>
         <button type="button" class="btn btn-block btn-primary text-white" id = "pending-build-button" onclick="pending_function()">Pending Builds</button>
         <button type="button" class="btn btn-block btn-primary text-white" id = "worker-button" onclick="worker_function()">Workers</button>
         <button type="button" class="btn btn-block btn-primary text-white" id = "home-button" onclick="home_function()">Home</button>
+        <button type="button" class="btn btn-block btn-primary text-white" id = "new-builder-button" onclick="add_entry()">New Builder</button>
       </div>
 
     <!-- <form action="/action_page.php">
