@@ -13,13 +13,16 @@
       - matplotlib
       - scikit-learn
       - seaborn
+
+      - paths:
+        - wine_quality.csv
     </py-env>
 
 </head>
 
 <body>
-    <py-script src="JS/test.py"></py-script>
-    <py-script src="JS/train.py"></py-script>
+    <py-script src="Python/test.py"></py-script>
+    <!-- <py-script src="Python/train.py"></py-script> -->
     
     <h1>This section is for building the CI application</h1>
 
@@ -92,6 +95,9 @@
 
       from js import console, document 
       from pyodide import create_proxy
+
+      import pandas as pd
+      df = pd.read_csv("wine_quality.csv")
 
       <!-- convert the varibles to integers -->
       a = int(document.getElementById("arg-1").innerHTML)

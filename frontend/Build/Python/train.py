@@ -18,7 +18,7 @@ seed = 42
 ################################
 
 # Load in the data
-df = pd.read_csv("wine_quality.csv")
+df = pd.read_csv('wine_quality.csv')
 
 # Split into train and test sections
 y = df.pop("quality")
