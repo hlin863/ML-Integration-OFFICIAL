@@ -2,6 +2,7 @@
 <html lang="en-gb">
 <head>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src = "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
     <script type = "text/javascript" src="JS/button.js"></script>
     <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
 </head>
@@ -48,8 +49,8 @@
     
       <!-- section to test the function calculating the sum of the values 10 and 5 -->
     <div class="col-3">
-      <button type="button" class="btn btn-outline-success">10</button>
-      <button type="button" class="btn btn-outline-success">5</button>
+      <button type="button" class="btn btn-outline-success" id = "arg-1">10</button>
+      <button type="button" class="btn btn-outline-success" id = "arg-2">5</button>
       <button type="button" class="btn btn-outline-success" id="add-result"></button>
     </div>
 
@@ -68,24 +69,22 @@
     
     <py-script>
 
-      from js import document 
+      from js import console, document 
       from pyodide import create_proxy
 
-      <!-- a is the variable from the button with the value 10 -->
-      a = 10
-      b = 5
+      <!-- convert the varibles to integers -->
+      a = int(document.getElementById("arg-1").innerHTML)
+      b = int(document.getElementById("arg-2").innerHTML)
 
-      def runPython(a, b):
-        
-        print("Hello World")
+      def sum(*args):
+        sum = a + b
+        console.log("The sum of the values is: ", sum)
+        document.getElementById("add-result").innerHTML = sum
 
-        return a + b
+      function_proxy = create_proxy(sum)
 
-      function_proxy = create_proxy(runPython)
-
-      document.getElementById("builder-button").addEventListener("click", function_proxy)
-      
-      document.getElementById("add-result").innerHTML = function_proxy(a, b)
+      builder_btn = document.getElementById("builder-button")
+      builder_btn.addEventListener("click", function_proxy)
 
     </py-script>
   
