@@ -1,0 +1,11 @@
+{
+    "name": "buildbot-nestedexample",
+    "engines": {
+        "node": ">=0.10.0",
+        "npm": ">=1.4.0"
+    },
+    "dependencies": {
+        "guanlecoja": "~1.1.0",
+        "gulp": "3.9.0"
+    }
+}

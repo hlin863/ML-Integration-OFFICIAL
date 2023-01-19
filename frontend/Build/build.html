@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en-gb">
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src = "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+    <script type = "text/javascript" src="JS/button.js"></script>
+    <script type = "text/javascript" src="JS/table.js"></script>
+    <link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css"/>
+    <script defer src="https://pyscript.net/alpha/pyscript.js"></script>
+
+    <py-env>
+      - numpy
+      - pandas
+      - matplotlib
+      - scikit-learn
+      - seaborn
+
+      - paths:
+        - wine_quality.csv
+    </py-env>
+
+</head>
+
+<body>
+    <py-script src="Python/test.py"></py-script>
+    <py-script src="Python/train.py"></py-script>
+    
+    <h1>This section is for building the CI application</h1>
+
+    <p>Click on the "Choose File" button to upload a file:</p>
+
+    <form action="action_page.php" method="post" enctype="multipart/form-data">
+        File: <input type="file" name="file"/> 
+        <input type="submit" value="Upload" />
+    </form>
+
+    <table class="table table-striped" id = "ci-result-table">
+        <thead>
+          <tr>
+            <th scope="col" id = "name-heading">Name</th>
+            <th scope="col" id = "start-time-heading">Start Time</th>
+            <th scope="col" id = "finish-time-heading">Finish Time</th>
+            <th scope="col" id = "handle-heading">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Wine Application</th>
+            <td>00:00:00 1/1/2000</td>
+            <td>15:00:00 1/1/2005</td>
+            <td>@mdo</td>
+          </tr>
+          <!-- <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td>Larry</td>
+            <td>the Bird</td>
+            <td>@twitter</td>
+          </tr> -->
+        </tbody>
+      </table>
+    
+      <!-- section to test the function calculating the sum of the values 10 and 5 -->
+    <div class="col-4">
+      <button type="button" class="btn btn-outline-success" id = "arg-1">10</button>
+      <button type="button" class="btn btn-outline-success" id = "arg-2">5</button>
+      <button type="button" class="btn btn-outline-success" id="add-result"></button>
+      <button type="button" class="btn btn-outline-success" id="product-result"></button>
+    </div>
+
+    <div class="col-5">
+        <button type="button" class="btn btn-block btn-primary text-white" id = "builder-button">Builders</button>
+        <button type="button" class="btn btn-block btn-primary text-white" id = "pending-build-button" onclick="pending_function()">Pending Builds</button>
+        <button type="button" class="btn btn-block btn-primary text-white" id = "worker-button" onclick="worker_function()">Workers</button>
+        <button type="button" class="btn btn-block btn-primary text-white" id = "home-button" onclick="home_function()">Home</button>
+        <button type="button" class="btn btn-block btn-primary text-white" id = "new-builder-button" onclick="add_entry()">New Builder</button>
+      </div>
+
+    <!-- <form action="/action_page.php">
+        <input type="file" id="test-code-upload" name="filename" accept=".py">
+        <input type="submit" onclick="uploadTestCode()">
+    </form> -->
+
+    <py-repl>
+
+      <!-- provides a platform to run the external python scripts. -->
+        
+    </py-repl>
+
+    
+    <py-script>
+
+      from js import console, document 
+      from pyodide import create_proxy
+
+      import pandas as pd
+      df = pd.read_csv("wine_quality.csv")
+
+      <!-- convert the varibles to integers -->
+      a = int(document.getElementById("arg-1").innerHTML)
+      b = int(document.getElementById("arg-2").innerHTML)
+
+      def sum(*args):
+        sum = a + b
+        console.log("The sum of the values is: ", sum)
+        document.getElementById("add-result").innerHTML = sum
+
+      function_proxy = create_proxy(sum)
+
+      builder_btn = document.getElementById("builder-button")
+      builder_btn.addEventListener("click", function_proxy)
+
+    </py-script>
+  
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+</body>
+</html>

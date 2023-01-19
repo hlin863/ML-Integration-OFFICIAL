@@ -11,5 +11,23 @@ jobs:
         env:
           REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          pip install -U pip # upgrades pip
           pip install -r requirements.txt
           python train.py
+
+          echo "MODEL METRICS"
+          cat metrics.txt
+
+          echo "Data Visualization"
+          cml-publish feature_importance.png --md >> report.md
+          cml-publish residuals.png --md >> report.md
+
+          cml-send-comment report.md
+
+  - name: Metrics embed # embed the metrics into GitHub CI System. 
+    uses: lowlighter/metrics@v3.32
+
+  # win:
+  # # determines the platform for the application.
+  #   name: Win / python ${{ matrix.python-version }}
+  #   runs-on: windows-latest

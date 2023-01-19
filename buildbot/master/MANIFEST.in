@@ -1,0 +1,37 @@
+include MANIFEST.in README.rst CREDITS COPYING UPGRADING
+
+include docs/examples/*.cfg
+include docs/conf.py
+include docs/Makefile
+include docs/buildbot.1
+include docs/*.rst
+include docs/_images/*
+include docs/_static/*
+include docs/_templates/*
+include docs/tutorial/*.rst
+include docs/tutorial/_images/*.png
+include docs/manual/*.rst
+include docs/manual/_images/*.svg
+include docs/manual/_images/*.png
+include docs/manual/_images/*.txt
+include docs/manual/_images/icon.blend
+include docs/manual/_images/Makefile
+include docs/manual/installation/*.rst
+include docs/bbdocs/*.py
+include docs/developer/*
+include docs/developer/_images/*
+
+include docs/relnotes/*
+
+include buildbot/scripts/sample.cfg
+include buildbot/scripts/buildbot_tac.tmpl
+include buildbot/reporters/templates/*.txt
+
+include buildbot/spec/api.raml
+include buildbot/spec/types/*.raml
+
+include buildbot/db/migrations/README include buildbot/db/migrations/alembic.ini
+
+include contrib/* contrib/windows/* contrib/os-x/* contrib/css/* contrib/libvirt/*
+include contrib/trac/* contrib/trac/bbwatcher/* contrib/trac/bbwatcher/templates/*
+include contrib/init-scripts/* contrib/bash/* contrib/zsh/*
