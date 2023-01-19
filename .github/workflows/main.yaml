@@ -24,6 +24,9 @@ jobs:
 
           cml-send-comment report.md
 
+  - name: Metrics embed # embed the metrics into GitHub CI System. 
+    uses: lowlighter/metrics@v3.32
+
   # win:
   # # determines the platform for the application.
   #   name: Win / python ${{ matrix.python-version }}
