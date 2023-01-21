@@ -27,19 +27,11 @@
     <py-script src="Python/test.py"></py-script>
     <py-script src="Python/train.py"></py-script>
     
-    <h1>This section is for building the CI application</h1>
-
-    <div>
-      <label for="formFileLg" class="form-label">Upload Python Input File</label>
-      <input class="form-control form-control-lg" id="formFileLg" type="file">
-
-      <div>Relay 1:
-        <form action="{% url 'nettoyage'%}" method="POST">
-            {% csrf_token %}
-            <input type="submit" value="Toggle" id="toggle1" />
-        </form>
-    </div>
-    </div>
+    <!-- <form action="PHP/uploadPythonCode.php" method="post" id="myForm" enctype="multipart/form-data">
+      Select a Python file to upload:
+      <input type="file" name="fileToUpload" id="fileToUpload">
+      <button name="submit" class="btn btn-primary" type="submit" value="submit">Upload File</button>
+    </form> -->
 
     <table class="table table-striped" id = "ci-result-table">
         <thead>
