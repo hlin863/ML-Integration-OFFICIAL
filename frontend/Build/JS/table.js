@@ -1,4 +1,13 @@
 function add_entry(){
+    var date = new Date();
+
+    var y = date.getFullYear();
+
+    var m = date.getMonth() + 1;
+
+    var d = date.getDate();
+
+    console.log("y: " + y + " m: " + m + " d: " + d);
 
     var table = document.getElementById("ci-result-table");
 
@@ -14,8 +23,17 @@ function add_entry(){
 
     for (let i = 0; i < columnCount; i++){
 
-      var cell = row.insertCell(i);
-      cell.innerHTML = i;
+      if (i == 1){
+
+        var cell = row.insertCell(i);
+        cell.innerHTML = d + "-" + m + "-" + y;
+
+      } else {
+          
+        var cell = row.insertCell(i);
+        cell.innerHTML = i;
+  
+      }
 
     }
 
