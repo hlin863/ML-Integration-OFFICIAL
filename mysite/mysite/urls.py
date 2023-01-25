@@ -16,8 +16,20 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import home_view
+# Use include() to add paths from the catalog application
+from django.urls import include
 
 urlpatterns = [
     path('', home_view),
     path("admin/", admin.site.urls),
+]
+
+urlpatterns += [
+    path('catalog/', include('catalog.urls')),
+]
+
+#Add URL maps to redirect the base URL to our application
+from django.views.generic import RedirectView
+urlpatterns += [
+    path('', RedirectView.as_view(url='catalog/', permanent=True)),
 ]
