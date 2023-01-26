@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Django Girls blog</title>
+    <title>ML CI Introduction</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
@@ -44,7 +44,7 @@
             <a href="{% url 'post_new' %}" class="top-menu"><span class="glyphicon glyphicon-plus"></span></a>
             {% endif %}
         </div>
-        <h1><a href="/">Django Girls Blog</a></h1>
+        <h1><a href="/">ML CI Introduction</a></h1>
     </div>
     <div class="content container">
         <div class="row">
@@ -62,8 +62,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 hidden-sm hidden-xs"><img src = "/images/ci-web-structure.png" class="wp2"></div>
-                <!-- <div class="col-md-3 hidden-sm hidden-xs"></div> -->
+                <div class="col-md-3 hidden-sm hidden-xs"><p>{% load static %} <img src="{% static "blog/images/ci-web-structure.png" %}" alt="web structure for CI" /></p></div>
+                <!-- <div class="col-md-3 hidden-sm hidden-xs"><img src = "/images/ci-web-structure.png" class="wp2"></div> -->
                 <div class="col-md-6">
                     <p>
                         Continuous Integration has come a long way since it's initial development in the 1990's. 
@@ -73,7 +73,8 @@
                         to help the user with integrating their commits on ML projects.
                     </p>
                 </div>
-                <div class="col-md-3 hidden-sm hidden-xs"><img src = "/images/ci-web-structure.png" class="wp2"></div>
+                <div class="col-md-3 hidden-sm hidden-xs"><p>{% load static %} <img src="{% static "blog/images/ci-web-structure.png" %}" alt="web structure for CI" /></p></div>
+                <!-- <div class="col-md-3 hidden-sm hidden-xs"><img src = "/images/ci-web-structure.png" class="wp2"></div> -->
                 <!-- <div class="col-md-3 hidden-sm hidden-xs"><img src="img/DSD_0214.jpg" class="wp2"></div> -->
             </div>
             <div class="row">
