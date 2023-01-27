@@ -4,7 +4,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/blog.css' %}"> -->
 </head>
 
 <body>
@@ -12,5 +12,52 @@
     <h1>
         <a href="{% url 'post_list' %}">ML CI Build Platform</a>
     </h1>
+
+    <div class="build-table">
+        <table class="table table-striped" id = "ci-result-table">
+            <thead>
+              <tr>
+                <th scope="col" id = "name-heading">Name</th>
+                <th scope="col" id = "start-time-heading">Start Time</th>
+                <th scope="col" id = "finish-time-heading">Finish Time</th>
+                <th scope="col" id = "passed-heading">Passed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Wine Application</th>
+                <td>00:00:00 1/1/2000</td>
+                <td>15:00:00 1/1/2005</td>
+                <td>True</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="text-center">
+
+        <div class = "buttons-panel col-5"> 
+
+            <button type="button" class="btn btn-primary" id = "refresh-button">Refresh</button>
+
+            <button type="button" class="btn btn-primary" id = "run-button">Run</button>
+
+            <button type="button" class="btn btn-primary" id = "stop-button">Stop</button>
+
+            <button type="button" class="btn btn-primary" id = "delete-button">Delete</button>
+
+            <!-- clicks the button to return to base.html -->
+            <button type="button" class="btn btn-primary" id = "home-button" href={% templates "blog/base.html" %}>Home</button>
+
+        </div>
+
+    </div>
+
+    <div class="video-demo">
+
+        <!-- width is screen width -->
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1er2cjUq1UI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+    </div>
 
 </body>
