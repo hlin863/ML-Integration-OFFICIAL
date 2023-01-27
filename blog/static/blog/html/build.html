@@ -37,22 +37,18 @@
         </table>
     </div>
 
-    <div class="text-center">
+    <div class = "buttons-panel col-5"> 
 
-        <div class = "buttons-panel col-5"> 
+      <button type="button" class="btn btn-primary" id = "refresh-button">Refresh</button>
 
-            <button type="button" class="btn btn-primary" id = "refresh-button">Refresh</button>
+      <button type="button" class="btn btn-primary" id = "run-button" onclick="run_workflow()">Run</button>
 
-            <button type="button" class="btn btn-primary" id = "run-button" onclick="run_workflow()">Run</button>
+      <button type="button" class="btn btn-primary" id = "stop-button" onclick="run_stop()">Stop</button>
 
-            <button type="button" class="btn btn-primary" id = "stop-button" onclick="run_stop()">Stop</button>
+      <button type="button" class="btn btn-primary" id = "delete-button" onclick="run_delete()">Delete</button>
 
-            <button type="button" class="btn btn-primary" id = "delete-button" onclick="run_delete()">Delete</button>
-
-            <!-- clicks the button to return to base.html -->
-            <button type="button" class="btn btn-primary" id = "home-button" href={% templates "blog/base.html" %}>Home</button>
-
-        </div>
+      <!-- clicks the button to return to base.html -->
+      <button type="button" class="btn btn-primary" id = "home-button" href={% templates "blog/base.html" %}>Home</button>
 
     </div>
 
