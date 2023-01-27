@@ -6,6 +6,13 @@ function upload_file(){
     // get the file name and size
     var fileName = file.name;
 
-    document.getElementById('display-file-details').innerHTML = "File " + fileName + " has been uploaded";
+    // check the file type to see if it is Python.
+    var fileType = file.type;
+
+    if (fileType == "text/x-python") {
+        document.getElementById('display-file-details').innerHTML += "Python file uploaded" + "<br>";        
+    }
+
+    document.getElementById('display-file-details').innerHTML += "File " + fileName + " has been uploaded";
 
 }
