@@ -8,6 +8,7 @@
     <script type="text/javascript" src = "js/stop.js"></script>
     <script type="text/javascript" src = "js/delete.js"></script>
     <script type="text/javascript" src = "js/upload_file.js"></script>
+    <script type="text/javascript" src = "js/upload_data.js"></script>
     <!-- <link rel="stylesheet" href="{% static 'css/blog.css' %}"> -->
 </head>
 
@@ -55,7 +56,14 @@
 
     </div>
 
+    <div class = "display-code-panel">
 
+      <a id = "display-code-details">
+
+      </a>
+
+    </div>
+  
     <div class = "display-uploaded-file-panel">
 
       <p id = "display-file-details">
@@ -64,14 +72,20 @@
 
     </div>
 
-    <div class = "input-panel">
+    <div class = "input-panel row align-items-start">
 
       <form>
         <!-- use django to create a form to upload a file -->
         <div class="form-group row">
-          <label for="inputFile" class="col-sm-2 col-form-label">File</label>
+          <label for="inputFile" class="col-sm-2 col-form-label">ML Code File</label>
           <div class="col-sm-10">
             <input type="file" class="form-control-file" id="inputMLFile">
+        </div>
+        <br>
+        <div class="form-group row">
+          <label for="inputFile" class="col-sm-2 col-form-label">ML Data File</label>
+          <div class="col-sm-10">
+            <input type="file" class="form-control-file" id="inputDataFile">
         </div>
         <div class="form-group row">
           <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
