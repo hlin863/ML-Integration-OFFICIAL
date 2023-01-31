@@ -9,7 +9,17 @@
     <script type="text/javascript" src = "js/delete.js"></script>
     <script type="text/javascript" src = "js/upload_file.js"></script>
     <script type="text/javascript" src = "js/upload_data.js"></script>
-    <!-- <link rel="stylesheet" href="{% static 'css/blog.css' %}"> -->
+    <script type="text/javascript" src = "js/editor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.js"
+        integrity="sha512-XMlgZzPyVXf1I/wbGnofk1Hfdx+zAWyZjh6c21yGo/k1zNC4Ve6xcQnTDTCHrjFGsOrVicJsBURLYktVEu/8vQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/mode/python/python.min.js"
+        integrity="sha512-/mavDpedrvPG/0Grj2Ughxte/fsm42ZmZWWpHz1jCbzd5ECv8CB7PomGtw0NAnhHmE/lkDFkRMupjoohbKNA1Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- include Brython to help with development of Python code in a browser. -->
+    <script src="https://raw.githack.com/brython-dev/brython/master/www/src/brython.js"></script>
+    <script src="https://raw.githack.com/brython-dev/brython/master/www/src/brython_stdlib.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
 </head>
 
 <body>
@@ -56,70 +66,54 @@
 
     </div>
 
-    <div class = "display-code-panel">
-
-      <a id = "display-code-details">
-
-      </a>
-
-    </div>
-  
-    <div class = "display-uploaded-file-panel">
-
-      <p id = "display-file-details">
-
-      </p>
-
-    </div>
-
-    <div class = "input-panel row align-items-start">
-
-      <form>
-        <!-- use django to create a form to upload a file -->
-        <div class="form-group row">
-          <label for="inputFile" class="col-sm-2 col-form-label">ML Code File</label>
-          <form class="box" method="post" action="" enctype="multipart/form-data">
-            <div class="box__input">
-              <input class="box__file" type="file" name="files[]" id="file" data-multiple-caption="{count} files selected" multiple />
-              <label for="file"><strong>Choose a file</strong><span class="box__dragndrop"> or drag it here</span>.</label>
-              <button class="box__button" type="submit">Upload</button>
-            </div>
-            <!-- <div class="box__uploading">Uploading…</div>
-            <div class="box__success">Done!</div>
-            <div class="box__error">Error! <span></span>.</div> -->
-          </form>
-          <div class="col-sm-10">
-            <input type="file" class="form-control-file" id="inputMLFile">
+    <div class="container-fluid bg-light">
+      <section class="header text-center p-5">
+          <h2 class="text-dark">python editor with <a href="https://codemirror.net/" target="_blank">CodeMirror</a>
+              and
+              <a href="https://pyodide.org/en/stable/index.html" target="_blank">pyodide</a>
+          </h2>
+      </section>
+      <div class="d-flex flex-column">
+          <section class="input">
+              <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page">
+                          <h4>Input</h4>
+                      </a>
+                  </li>
+              </ul>
+              <div><textarea id="code" name="code">
+              </textarea>
+              </div>
+          </section>
+          <div class="align-self-center m-3">
+              <button type="button" class="btn btn-success" onclick="evaluatePython()">
+                  <h5>Run</h5>
+              </button>
           </div>
-        <br>
-        <div class="form-group row">
-          <label for="inputFile" class="col-sm-2 col-form-label">ML Data File</label>
-          <div class="col-sm-10">
-            <input type="file" class="form-control-file" id="inputDataFile">
-        </div>
-        <div class="form-group row">
-          <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
-          <div class="col-sm-10">
-            <input type="email" class="form-control" id="inputEmail" placeholder="Email">
-          </div>
-        </div>
-        <div class="form-group row">
-          <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
-          <div class="col-sm-10">
-            <input type="password" class="form-control" id="inputPassword" placeholder="Password">
-          </div>
-        </div>
-      </form>
+          <section class="output">
+              <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page">
+                          <h4>Output</h4>
+                      </a>
+                  </li>
+              </ul>
+              <div>
+                  <textarea id="output" name="output" class="w-100" rows="15">
+                  </textarea>
+              </div>
+          </section>
+      </div>
 
-    </div>
+  </div>
 
-    <div class="video-demo">
+  <div class="video-demo">
 
-        <h1>Youtube Tutorial defining Continuous Integration</h1>
+    <h1>Youtube Tutorial defining Continuous Integration</h1>
 
-        <!-- width is screen width -->
-        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1er2cjUq1UI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1er2cjUq1UI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
-    </div>
+  </div>
 
 </body>

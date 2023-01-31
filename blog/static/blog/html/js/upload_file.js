@@ -19,10 +19,10 @@ function run_uploaded_file(file) {
 
 }
 
-const dropBox = document.querySelector("#dropbox");
-dropBox.addEventListener("dragenter",dragEnter,false);
-dropBox.addEventListener("dragover",dragOver,false);
-dropBox.addEventListener("drop",drop,false);
+// const dropBox = document.querySelector("#dropbox");
+// dropBox.addEventListener("dragenter",dragEnter,false);
+// dropBox.addEventListener("dragover",dragOver,false);
+// dropBox.addEventListener("drop",drop,false);
 
 function dragEnter(e){
 	e.stopPropagation();
