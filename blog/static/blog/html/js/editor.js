@@ -30,7 +30,7 @@ function addToOutput(s) {
 async function evaluatePython() {
 	let pyodide = await pyodideReadyPromise;
 	try {
-		console.log(editor.getValue())
+		// console.log(editor.getValue())
 
 		// split editor value into lines
 		let lines = editor.getValue().split("\n");
@@ -48,10 +48,12 @@ async function evaluatePython() {
 
 				lines[i] = lines[i].replace(")", "");
 
-				// replace all quotation marks with empty strings
-				lines[i] = lines[i].replace("\"", "");
+				console.log(lines[i]);
 
-				lines[i] = lines[i].replace("\'", "");
+				// replace all quotation marks with empty strings
+				lines[i] = lines[i].replace(/"/g, '');
+
+				lines[i] = lines[i].replace(/'/g, '');
 
 				// set the output to the result of the print statement
 				addToOutput(lines[i]);
