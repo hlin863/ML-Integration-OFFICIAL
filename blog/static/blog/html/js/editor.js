@@ -48,6 +48,11 @@ async function evaluatePython() {
 			// if it is, remove the print statement
 			lines[0] = lines[0].replace("print", "");
 			console.log(lines[0]);
+
+			// console.log("This is a print statement");
+
+			// displays the type of the output
+			console.log(typeof lines[0]);
 			// set the output to the result of the print statement
 			addToOutput(lines[0]);
 		} else {
