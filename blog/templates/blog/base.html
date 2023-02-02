@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
     <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <script type="text/javascript" src = "js/redirect_menu.js"></script>
 </head>
 
 <body>
@@ -22,10 +23,12 @@
               <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href={% static "blog/html/build.html" %}>Build</a>
+              <a class="nav-link" href={% static "blog/html/build.html" %}>Build</a> 
+              <!-- change to build_temp for the work flow table -->
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Workflow</a>
+              <a class="nav-link" href={% static "blog/html/workflow.html" %}>Workflow</a> 
+              <!-- a referenc to the workflow site. -->
             </li>
             <li class="nav-item">
               <a class="nav-link disabled" href="#">Details</a>
@@ -62,9 +65,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-3 hidden-sm hidden-xs"><p>{% load static %} <img src="{% static "blog/images/ci-web-structure.png" %}" alt="web structure for CI" /></p></div>
-                <!-- <div class="col-md-3 hidden-sm hidden-xs"><img src = "/images/ci-web-structure.png" class="wp2"></div> -->
-                <div class="col-md-6">
+                <div class="col-md-3 hidden-sm hidden-xs"><p>{% load static %} <img src="{% static "blog/images/rsz_ci-web-structure.png" %}" alt="web structure for CI" /></p></div>
+                <div class="col-md-3">
                     <p>
                         Continuous Integration has come a long way since it's initial development in the 1990's. 
                         It's now a common practice in the software development industry and can be used to improve
@@ -73,16 +75,63 @@
                         to help the user with integrating their commits on ML projects.
                     </p>
                 </div>
-                <div class="col-md-3 hidden-sm hidden-xs"><p>{% load static %} <img src="{% static "blog/images/ci-web-structure.png" %}" alt="web structure for CI" /></p></div>
-                <!-- <div class="col-md-3 hidden-sm hidden-xs"><img src = "/images/ci-web-structure.png" class="wp2"></div> -->
-                <!-- <div class="col-md-3 hidden-sm hidden-xs"><img src="img/DSD_0214.jpg" class="wp2"></div> -->
+                <div class="col-md-3 hidden-sm hidden-xs"><p>{% load static %} <img src="{% static "blog/images/rsz_ci-web-structure.png" %}" alt="web structure for CI" /></p></div>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-sm-4 col-sm-push-2 col-xs-6 hidden-md hidden-lg"><img src="img/IMG_2317.jpg" class="wp8"></div>
                 <div class="col-sm-4 col-sm-push-2 col-xs-6 hidden-md hidden-lg"><img src="img/DSD_0214.jpg" class="wp9"></div>
-            </div>
+            </div> -->
         </div>
     </section>
+
+    <section id = "sub-menu">
+        <ul class="list-group">
+            <li class="list-group-item"><a onclick="redirect_ci_history()">CI History</a></li>
+            <li class="list-group-item">Experimental Section</li>
+            <li class="list-group-item">Morbi leo risus</li>
+            <li class="list-group-item">Porta ac consectetur ac</li>
+            <li class="list-group-item">Vestibulum at eros</li>
+        </ul>
+    </section>
+
+    <section id="CI History">
+
+        <h1>History of CI development</h1>
+
+
+
+        <div class = "col-md-3">
+
+            <p>{% load static %} <img src="{% static "blog/images/rsz_ci-web-structure.png" %}" alt="web structure for CI" /></p>
+
+        </div>
+
+        <div class = "col-md-3">
+            
+            <p class = "text-center">
+
+                The term continuous integration was first used in 1994 by Grady Booch. A first example when CI was applied was for
+                the framework of an Extreme programming project "Chrysler Comprehensive Compensation System Project" in 1997. The 
+                project focuses on frequently integrating builds into the application. 
+            
+            </p>
+           
+        </div>
+
+        <div class = "col-md-3">
+
+            <p>{% load static %} <img src="{% static "blog/images/rsz_ci-web-structure.png" %}" alt="web structure for CI" /></p>
+        
+    </section>
+
+    <div class = "trytopnav ws-grey">
+
+        <div class="w3-bar w3-hide-small" style="overflow:hidden;">
+          <a href="javascript:void(0);" class="w3-button w3-bar-item topnav-icons fa fa-home w3-hover-none" style="font-size:28px!important;margin-right:4px;margin-bottom:-4px;">
+          </a>
+        </div>
+  
+    </div>
 </body>
 
 </html>

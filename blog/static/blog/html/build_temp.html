@@ -1,0 +1,119 @@
+<head>
+    <title>ML CI Build Platform</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src = "js/run.js"></script>
+    <script type="text/javascript" src = "js/stop.js"></script>
+    <script type="text/javascript" src = "js/delete.js"></script>
+    <script type="text/javascript" src = "js/upload_file.js"></script>
+    <script type="text/javascript" src = "js/upload_data.js"></script>
+    <script type="text/javascript" src = "js/editor.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.js"
+        integrity="sha512-XMlgZzPyVXf1I/wbGnofk1Hfdx+zAWyZjh6c21yGo/k1zNC4Ve6xcQnTDTCHrjFGsOrVicJsBURLYktVEu/8vQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/mode/python/python.min.js"
+        integrity="sha512-/mavDpedrvPG/0Grj2Ughxte/fsm42ZmZWWpHz1jCbzd5ECv8CB7PomGtw0NAnhHmE/lkDFkRMupjoohbKNA1Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- include Brython to help with development of Python code in a browser. -->
+    <script src="https://raw.githack.com/brython-dev/brython/master/www/src/brython.js"></script>
+    <script src="https://raw.githack.com/brython-dev/brython/master/www/src/brython_stdlib.js"></script>
+    <script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+</head>
+
+<body>
+
+    <h1>
+        <a href="{% url 'post_list' %}">ML CI Build Platform</a>
+    </h1>
+
+    <div class="build-table">
+        <table class="table table-striped" id = "ci-result-table">
+            <thead>
+              <tr>
+                <th scope="col" id = "name-heading">Name</th>
+                <th scope="col" id = "start-time-heading">Start Time</th>
+                <th scope="col" id = "finish-time-heading">Finish Time</th>
+                <th scope="col" id = "passed-heading">Passed</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Wine Application</th>
+                <td>00:00:00 1/1/2000</td>
+                <td>15:00:00 1/1/2005</td>
+                <td>True</td>
+              </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class = "buttons-panel col-6"> 
+
+      <button type="button" class="btn btn-primary" id = "refresh-button">Refresh</button>
+
+      <button type="button" class="btn btn-primary" id = "run-button" onclick="run_workflow()">Run</button>
+
+      <button type="button" class="btn btn-primary" id = "stop-button" onclick="run_stop()">Stop</button>
+
+      <button type="button" class="btn btn-primary" id = "delete-button" onclick="run_delete()">Delete</button>
+
+      <button type="button" class="btn btn-primary" id = "delete-button" onclick="upload_file()">Upload File</button>
+
+      <!-- clicks the button to return to base.html -->
+      <button type="button" class="btn btn-primary" id = "home-button"><a href="base.html">Home</a></button>
+
+    </div>
+
+    <div class="container-fluid bg-light">
+      <section class="header text-center p-5">
+          <h2 class="text-dark">python editor with <a href="https://codemirror.net/" target="_blank">CodeMirror</a>
+              and
+              <a href="https://pyodide.org/en/stable/index.html" target="_blank">pyodide</a>
+          </h2>
+      </section>
+      <div class="d-flex flex-column">
+          <section class="input">
+              <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page">
+                          <h4>Input</h4>
+                      </a>
+                  </li>
+              </ul>
+              <div><textarea id="code" name="code">
+              </textarea>
+              </div>
+          </section>
+          <div class="align-self-center m-3">
+              <button type="button" class="btn btn-success" onclick="evaluatePython()">
+                  <h5>Run</h5>
+              </button>
+          </div>
+          <section class="output">
+              <ul class="nav nav-tabs">
+                  <li class="nav-item">
+                      <a class="nav-link active" aria-current="page">
+                          <h4>Output</h4>
+                      </a>
+                  </li>
+              </ul>
+              <div>
+                  <textarea id="output" name="output" class="w-100" rows="15">
+                  </textarea>
+              </div>
+          </section>
+      </div>
+
+  </div>
+
+  <div class="video-demo">
+
+    <h1>Youtube Tutorial defining Continuous Integration</h1>
+
+    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1er2cjUq1UI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+
+  </div>
+
+</body>
