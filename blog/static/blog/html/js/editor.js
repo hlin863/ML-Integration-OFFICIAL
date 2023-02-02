@@ -35,31 +35,31 @@ async function evaluatePython() {
 		// split editor value into lines
 		let lines = editor.getValue().split("\n");
 
-		console.log(lines.length);
+		let n_lines = lines.length;
 
-		// iterate through the lines and print each line
-		for (let i = 0; i < lines.length; i++) {
-			console.log(i);
-			console.log(lines[i]);
+		for (let i = 0; i < n_lines; i++){
+			// determine if the instruction is a print statement
+			if (lines[i].includes("print")) {
+				// if it is, remove the print statement
+				lines[i] = lines[i].replace("print", "");
+
+				// replace the brackets with empty strings
+				lines[i] = lines[i].replace("(", "");
+
+				lines[i] = lines[i].replace(")", "");
+
+				// replace all quotation marks with empty strings
+				lines[i] = lines[i].replace("\"", "");
+
+				lines[i] = lines[i].replace("\'", "");
+
+				// set the output to the result of the print statement
+				addToOutput(lines[i]);
+			} else {
+				let output = pyodide.runPython(lines[0]);
+				addToOutput(output);
+			}
 		}
-
-		// determine if the instruction is a print statement
-		if (lines[0].includes("print")) {
-			// if it is, remove the print statement
-			lines[0] = lines[0].replace("print", "");
-			console.log(lines[0]);
-
-			// console.log("This is a print statement");
-
-			// displays the type of the output
-			console.log(typeof lines[0]);
-			// set the output to the result of the print statement
-			addToOutput(lines[0]);
-		} else {
-			let output = pyodide.runPython(lines[0]);
-			addToOutput(output);
-		}
-
 		
 	} catch (err) {
 		addToOutput(err);
