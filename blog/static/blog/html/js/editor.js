@@ -31,8 +31,31 @@ async function evaluatePython() {
 	let pyodide = await pyodideReadyPromise;
 	try {
 		console.log(editor.getValue())
-		let output = pyodide.runPython(editor.getValue());
-		addToOutput(output);
+
+		// split editor value into lines
+		let lines = editor.getValue().split("\n");
+
+		console.log(lines.length);
+
+		// iterate through the lines and print each line
+		for (let i = 0; i < lines.length; i++) {
+			console.log(i);
+			console.log(lines[i]);
+		}
+
+		// determine if the instruction is a print statement
+		if (lines[0].includes("print")) {
+			// if it is, remove the print statement
+			lines[0] = lines[0].replace("print", "");
+			console.log(lines[0]);
+			// set the output to the result of the print statement
+			addToOutput(lines[0]);
+		} else {
+			let output = pyodide.runPython(lines[0]);
+			addToOutput(output);
+		}
+
+		
 	} catch (err) {
 		addToOutput(err);
 	}
