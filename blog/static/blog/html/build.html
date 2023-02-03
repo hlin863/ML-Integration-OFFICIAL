@@ -11,6 +11,7 @@
 	<script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
 	<!-- add a script to allow the user to integrate sign in with Google. -->
 	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="322847203408-4ijktdu84k311sg4l9qtqf91mr2lnn85.apps.googleusercontent.com">
 </head>
 
 <body>
@@ -62,7 +63,8 @@
 	</div>
 
 	<!-- provides a platform for the user to sign in. -->
-	<div id="g_id_onload"
+	<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	<!-- <div id="g_id_onload"
          data-client_id="322847203408-4ijktdu84k311sg4l9qtqf91mr2lnn85.apps.googleusercontent.com"
          data-login_uri="https://your.domain/your_login_endpoint"
          data-auto_prompt="false">
@@ -75,7 +77,7 @@
          data-shape="rectangular"
          data-callback="OnSuccess"
          data-logo_alignment="left">
-    </div>
+    </div> -->
 
 	<!-- Provides a platform for the user to give feedback for the application. -->
 	<div class = "feedback-section">
@@ -97,6 +99,18 @@
 
 		</div>
 	</div>
+
+	<script>
+
+		function onSignIn(googleUser) {
+			var profile = googleUser.getBasicProfile();
+			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			console.log('Name: ' + profile.getName());
+			console.log('Image URL: ' + profile.getImageUrl());
+			console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+		}
+
+	</script>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.js"
 		integrity="sha512-XMlgZzPyVXf1I/wbGnofk1Hfdx+zAWyZjh6c21yGo/k1zNC4Ve6xcQnTDTCHrjFGsOrVicJsBURLYktVEu/8vQ=="
