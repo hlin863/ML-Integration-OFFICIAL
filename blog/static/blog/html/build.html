@@ -9,6 +9,8 @@
 		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css" />
 	<script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+	<!-- add a script to allow the user to integrate sign in with Google. -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 
 <body>
@@ -58,6 +60,44 @@
 		</div>
 
 	</div>
+
+	<!-- provides a platform for the user to sign in. -->
+	<div id="g_id_onload"
+         data-client_id="322847203408-4ijktdu84k311sg4l9qtqf91mr2lnn85.apps.googleusercontent.com"
+         data-login_uri="https://your.domain/your_login_endpoint"
+         data-auto_prompt="false">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-callback="OnSuccess"
+         data-logo_alignment="left">
+    </div>
+
+	<!-- Provides a platform for the user to give feedback for the application. -->
+	<div class = "feedback-section">
+		<textarea id="feedback" name="feedback" class="w-100" rows="15">
+			Leave your feedback here about our amazing editor
+		</textarea>
+		<button type="button" class="btn btn-success" onclick="sendFeedback()">
+			<h5>Send Feedback</h5>
+		</button>
+	</div>
+
+	<div class="display-feedback-section">
+		<h3>Feedback</h3>
+		<div class="feedback-display">
+
+			<textarea id = "feedback-display" name = "feedback-display" class="w-100" rows="15">
+
+			</textarea>
+
+		</div>
+	</div>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.js"
 		integrity="sha512-XMlgZzPyVXf1I/wbGnofk1Hfdx+zAWyZjh6c21yGo/k1zNC4Ve6xcQnTDTCHrjFGsOrVicJsBURLYktVEu/8vQ=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
@@ -65,6 +105,7 @@
 		integrity="sha512-/mavDpedrvPG/0Grj2Ughxte/fsm42ZmZWWpHz1jCbzd5ECv8CB7PomGtw0NAnhHmE/lkDFkRMupjoohbKNA1Q=="
 		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<script src='js/editor.js'></script>
+	<script src='js/feedback_form.js'></script>
 </body>
 
 </html>
