@@ -1,4 +1,4 @@
-function upload_file(){
+function upload_data(){
 
     // updates the file and produce a message to state that the file has been updated
     var file = document.getElementById('inputDataFile').files[0];
