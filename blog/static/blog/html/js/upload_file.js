@@ -1,8 +1,8 @@
 function upload_file(){
 
-    var file = document.getElementById('inputMLFile').files[0]; 
+    var filename = document.getElementById('inputMLFile').files[0].name; 
 
-    console.log(file);
+    console.log(filename);
 
     // var form_data = new FormData();
     // form_data.append('file', file);
