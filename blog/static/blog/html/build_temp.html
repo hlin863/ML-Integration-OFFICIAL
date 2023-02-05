@@ -49,6 +49,14 @@
         </table>
     </div>
 
+    <!-- create a section for uploading file -->
+    <div class="upload-file">
+        <form action="/upload_file" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="inputMLFile">
+            <input type="submit" value="Upload File" name="submit">
+        </form>
+    </div>
+
     <div class = "buttons-panel col-6"> 
 
       <button type="button" class="btn btn-primary" id = "refresh-button">Refresh</button>
