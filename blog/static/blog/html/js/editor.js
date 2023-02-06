@@ -11,7 +11,7 @@ const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 	matchBrackets: true
 });
 
-editor.setValue(`sum([1, 2, 3, 4, 5])`);
+// editor.setValue(`sum([1, 2, 3, 4, 5])`);
 output.value = "Initializing...\n";
 
 async function main() {
