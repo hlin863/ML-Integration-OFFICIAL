@@ -5,7 +5,19 @@ function upload_file(){
     var file = document.getElementById('inputMLFile').files[0];  // stores the file details..
 
     // download file onto a local document
-    
+
+    // display the file content on the console.
+    let reader = new FileReader(); // initalise a reader for reading file contents.
+
+    reader.onload = (function(theFile) {
+        return function(e) {
+          
+          jQuery( '#ms_word_filtered_html' ).val( e.target.result );
+        };
+    })(f);
+
+    // Read in the image file as a data URL.
+    reader.readAsText(file);
 
     console.log(filename);
 
