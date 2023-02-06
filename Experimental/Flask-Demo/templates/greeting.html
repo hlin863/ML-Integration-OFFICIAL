@@ -1,31 +1,41 @@
+<!DOCTYPE html>
+
 <html>
 
 <head>
-    <title>ML CI Introduction</title>
+
+    <title>ML CI Introduction Greeting Experiment</title>
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
-    <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
-    <script type="text/javascript" src = "js/redirect_menu.js"></script>
+
 </head>
 
 <body>
-    {% from "_formhelper.html" import render_field %}
-    <!-- create a section for the heading -->
+
     <div class="container">
+
         <div class="row">
+
             <div class="col-md-12">
-                <h1>ML CI Introduction</h1>
+
+                <h1>ML CI Introduction Greeting Experiment</h1>
+
             </div>
+
         </div>
+
     </div>
 
     <div class="container" id = "greeting-experiment">
-        <div>What is your name?</div>
-        <form method="post action="/greeting">
-            <dl>{{ render_field(form.name) }}</dl>
-            <input type="submit" value="Submit" name="submit-name-btn">
-        </form>
+
+        <div>
+            
+            Hello {{ name }}!
+
+        </div>
+
     </div>
 
 </body>
