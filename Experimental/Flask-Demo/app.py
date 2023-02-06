@@ -10,16 +10,16 @@ class HelloForm(Form):
 
 def index():
 
-    hello_form = HelloForm(request.form)
+    form = HelloForm(request.form)
 
-    return render_template('index.html', Form=hello_form)
+    return render_template('index.html', Form=form)
 
 @app.route('/hello', methods=['POST'])
 def hello():
 
-    hello_form = HelloForm(request.form)
+    form = HelloForm(request.form)
 
-    if request.method == 'POST' and hello_form.validate():
+    if request.method == 'POST' and form.validate():
 
         # if the form is valid, redirect to the hello page
 
@@ -27,8 +27,8 @@ def hello():
 
         return render_template('greeting.html', name=name)
 
-    return render_template('index.html', Form=hello_form)
+    return render_template('index.html', Form=form)
 
 if __name__ == '__main__':
 
-    app.run()
+    app.run(debug=True)
