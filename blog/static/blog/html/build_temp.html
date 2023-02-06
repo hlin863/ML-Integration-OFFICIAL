@@ -121,8 +121,9 @@
                       </a>
                   </li>
               </ul>
-              <div><textarea id="code" name="code">
-              </textarea>
+              <div>
+                <textarea id="code" name="code" class="w-100" rows="15">
+                </textarea>
               </div>
           </section>
           <div class="align-self-center m-3">
@@ -160,8 +161,6 @@
     <input id="upload" type=file   accept=".py" />
     </form>
     
-    <textarea class="form-control" rows=35 cols=120 id="ms_word_filtered_html"></textarea>
-    
     <script>
     function handleFileSelect(evt) {
         let files = evt.target.files; // FileList object
@@ -175,7 +174,7 @@
         reader.onload = (function(theFile) {
             return function(e) {
               
-              jQuery( '#ms_word_filtered_html' ).val( e.target.result );
+              jQuery( '#code' ).val( e.target.result );
             };
           })(f);
     
