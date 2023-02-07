@@ -12,7 +12,7 @@ def index():
 
     form = HelloForm(request.form)
 
-    return render_template('index.html', Form=form)
+    return render_template('index.html', form=form)
 
 @app.route('/hello', methods=['POST'])
 def hello():
@@ -27,7 +27,7 @@ def hello():
 
         return render_template('greeting.html', name=name)
 
-    return render_template('index.html', Form=form)
+    return render_template('index.html', form=form)
 
 if __name__ == '__main__':
 
