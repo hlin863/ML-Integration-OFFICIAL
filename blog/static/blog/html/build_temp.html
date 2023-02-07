@@ -66,11 +66,35 @@
 
         <form>
           <!-- use django to create a form to upload a file -->
-          <div class="form-group row">
-            <label for="inputFile" class="col-sm-2 col-form-label">File</label>
-            <div class="col-sm-10">
-              <input type="file" class="form-control-file" id="inputMLFile">
-          </div>
+          <form enctype="multipart/form-data">
+            <!-- accepts python code -->
+            <input id="upload" type=file   accept=".py" />
+          </form>
+            
+          <script>
+            function handleFileSelect(evt) {
+                let files = evt.target.files; // FileList object
+            
+                // use the 1st file from the list
+                let f = files[0];
+                
+                let reader = new FileReader();
+            
+                // Closure to capture the file information.
+                reader.onload = (function(theFile) {
+                    return function(e) {
+                      
+                      jQuery( '#code' ).val( e.target.result );
+                    };
+                  })(f);
+            
+                  // Read in the image file as a data URL.
+                  reader.readAsText(f);
+              }
+            
+              document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+          </script>
+        
           <div class="form-group row">
             <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
             <div class="col-sm-10">
@@ -155,34 +179,5 @@
     <iframe width="100%" height="100%" src="https://www.youtube.com/embed/1er2cjUq1UI" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
   </div>
-
-  <form enctype="multipart/form-data">
-    <!-- accepts python code -->
-    <input id="upload" type=file   accept=".py" />
-    </form>
-    
-    <script>
-    function handleFileSelect(evt) {
-        let files = evt.target.files; // FileList object
-    
-        // use the 1st file from the list
-        let f = files[0];
-        
-        let reader = new FileReader();
-    
-        // Closure to capture the file information.
-        reader.onload = (function(theFile) {
-            return function(e) {
-              
-              jQuery( '#code' ).val( e.target.result );
-            };
-          })(f);
-    
-          // Read in the image file as a data URL.
-          reader.readAsText(f);
-      }
-    
-      document.getElementById('upload').addEventListener('change', handleFileSelect, false);
-    </script>
 
 </body>
