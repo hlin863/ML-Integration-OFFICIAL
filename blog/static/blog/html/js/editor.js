@@ -1,4 +1,4 @@
-const output = document.getElementById("output");
+const output = document.getElementById("output-textarea");
 
 const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 	mode: {
@@ -11,16 +11,17 @@ const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 	matchBrackets: true
 });
 
-// editor.setValue(`sum([1, 2, 3, 4, 5])`);
+editor.setValue(`sum([1, 2, 3, 4, 5])`);
 output.value = "Initializing...\n";
 
 async function main() {
 	let pyodide = await loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/" });
 	// Pyodide ready
-	output.value += "Ready!\n";
+	// output.value += "Ready!\n";
 	return pyodide;
 };
 
+// Initialize pyodide ready promise as a global variable
 let pyodideReadyPromise = main();
 
 function addToOutput(s) {
@@ -28,7 +29,8 @@ function addToOutput(s) {
 }
 
 async function evaluatePython() {
-	let pyodide = await pyodideReadyPromise;
+
+	// let pyodide = await pyodideReadyPromise;
 	try {
 		// console.log(editor.getValue())
 
