@@ -1,4 +1,12 @@
-const output = document.getElementById("output-textarea");
+window.onload = function() {
+	const output = document.getElementById("output-textarea");
+
+	console.log(output);
+
+	const sample_paragraph = document.getElementById("sample-paragraph");
+
+	console.log(sample_paragraph);
+};
 
 const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 	mode: {
