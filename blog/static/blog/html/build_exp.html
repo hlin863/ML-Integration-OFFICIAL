@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+	<title>CODE EXPERIMENTATION PLATFORM</title>
+	<meta name='viewport' content='width=device-width, initial-scale=1'>
+	<!-- adds the jquery library -->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+		integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.48.4/codemirror.min.css" />
+	<script src="https://cdn.jsdelivr.net/pyodide/v0.18.1/full/pyodide.js"></script>
+	<!-- add a script to allow the user to integrate sign in with Google. -->
+	<script src="https://apis.google.com/js/platform.js" async defer></script>
+	<meta name="google-signin-client_id" content="322847203408-4ijktdu84k311sg4l9qtqf91mr2lnn85.apps.googleusercontent.com">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/codemirror.min.js"
+		integrity="sha512-XMlgZzPyVXf1I/wbGnofk1Hfdx+zAWyZjh6c21yGo/k1zNC4Ve6xcQnTDTCHrjFGsOrVicJsBURLYktVEu/8vQ=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.63.3/mode/python/python.min.js"
+		integrity="sha512-/mavDpedrvPG/0Grj2Ughxte/fsm42ZmZWWpHz1jCbzd5ECv8CB7PomGtw0NAnhHmE/lkDFkRMupjoohbKNA1Q=="
+		crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<script src='js/editor.js'></script>
+	<script src='js/feedback_form.js'></script>
+</head>
+
+<body>
+	<div class="container-fluid bg-light">
+		<section class="header text-center p-5">
+			<h2 class="text-dark">Test your code using our code editor featuring <a href="https://codemirror.net/" target="_blank">CodeMirror</a>
+				and
+				<a href="https://pyodide.org/en/stable/index.html" target="_blank">pyodide</a>
+			</h2>
+		</section>
+		<div class="d-flex flex-column">
+			<section class="input">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page">
+							<h4>Input</h4>
+						</a>
+					</li>
+				</ul>
+				<div>
+					<!-- set the text area to have same width as screen -->
+					<textarea id="code" name="code" class="w-100" rows="15">
+					</textarea>
+				</div>
+			</section>
+			<div class="align-self-center m-3">
+				<button type="button" class="btn btn-success" onclick="evaluatePython()">
+					<h5>Run</h5>
+				</button>
+
+				<button type="button" class="btn btn-success" id = "home-button">
+					<h5><a href="base.html">Home</a></h5>
+				</button>
+
+			</div>
+			<section class="output">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link active" aria-current="page">
+							<h4>Output</h4>
+						</a>
+					</li>
+				</ul>
+				<div>
+					<textarea id="output-textarea" name="output" class="w-100" rows="15">
+						Demo
+					</textarea>
+				</div>
+			</section>
+		</div>
+
+	</div>
+
+	<!-- provides a platform for the user to sign in. -->
+	<div class = "sign-in-section text-center">	
+		<div class="g-signin2" data-onsuccess="onSignIn"></div>
+	</div>
+
+	<!-- Provides a platform for the user to give feedback for the application. -->
+	<div class = "feedback-section">
+		<textarea id="feedback" name="feedback" class="w-100" rows="15">
+			Leave your feedback here about our amazing editor
+		</textarea>
+		<button type="button" class="btn btn-success" onclick="sendFeedback()">
+			<h5>Send Feedback</h5>
+		</button>
+	</div>
+
+	<div class="display-feedback-section">
+		<h3>Feedback</h3>
+		<div class="feedback-display">
+
+			<textarea id = "feedback-display" name = "feedback-display" class="w-100" rows="15">
+
+			</textarea>
+
+		</div>
+	</div>
+
+	<!-- <form enctype="multipart/form-data">
+		<input id="upload" type=file   accept=".py" />
+	</form>
+		
+		<script>
+		function handleFileSelect(evt) {
+			let files = evt.target.files; // FileList object
+		
+			// use the 1st file from the list
+			let f = files[0];
+			
+			let reader = new FileReader();
+		
+			// Closure to capture the file information.
+			reader.onload = (function(theFile) {
+				return function(e) {
+				  jQuery( '#code' ).val( e.target.result );
+				};
+			  })(f);
+		
+			  // Read in the image file as a data URL.
+			  reader.readAsText(f);
+		  }
+		
+		  document.getElementById('upload').addEventListener('change', handleFileSelect, false);
+		</script>  -->
+
+	<script> 
+
+		function onSignIn(googleUser) {
+			var profile = googleUser.getBasicProfile();
+			console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
+			console.log('Name: ' + profile.getName());
+			console.log('Image URL: ' + profile.getImageUrl());
+			console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
+		}
+
+	</script>
+</body>
+
+</html>

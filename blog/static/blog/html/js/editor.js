@@ -1,12 +1,5 @@
-window.onload = function() {
-	const output = document.getElementById("output-textarea");
 
-	console.log(output);
-
-	const sample_paragraph = document.getElementById("sample-paragraph");
-
-	console.log(sample_paragraph);
-};
+const output = document.getElementById("output");
 
 const editor = CodeMirror.fromTextArea(document.getElementById("code"), {
 	mode: {
@@ -45,6 +38,8 @@ async function evaluatePython() {
 		// split editor value into lines
 		let lines = editor.getValue().split("\n");
 
+		console.log(lines[0]);
+
 		let n_lines = lines.length;
 
 		for (let i = 0; i < n_lines; i++){
@@ -68,7 +63,8 @@ async function evaluatePython() {
 				// set the output to the result of the print statement
 				addToOutput(lines[i]);
 			} else {
-				let output = pyodide.runPython(lines[0]);
+				console.log(output);
+				let output = pyodide.runPython(lines[i]);
 				addToOutput(output);
 			}
 		}
