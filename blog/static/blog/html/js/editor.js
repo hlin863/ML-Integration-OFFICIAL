@@ -32,41 +32,14 @@ function addToOutput(s) {
 async function evaluatePython() {
 
 	let pyodide = await pyodideReadyPromise;
+
 	try {
 
-		// split editor value into lines
-		let lines = editor.getValue().split("\n");
+		let result = await pyodide.runPythonAsync(editor.getValue());
 
-		// console.log(lines[0]);
+		console.log(result);
 
-		let n_lines = lines.length;
-
-		for (let i = 0; i < n_lines; i++){
-			// determine if the instruction is a print statement
-			if (lines[i].includes("print")) {
-				// if it is, remove the print statement
-				lines[i] = lines[i].replace("print", "");
-
-				// replace the brackets with empty strings
-				lines[i] = lines[i].replace("(", "");
-
-				lines[i] = lines[i].replace(")", "");
-
-				console.log(lines[i]);
-
-				// replace all quotation marks with empty strings
-				lines[i] = lines[i].replace(/"/g, '');
-
-				lines[i] = lines[i].replace(/'/g, '');
-
-				// set the output to the result of the print statement
-				addToOutput(lines[i]);
-			} else {
-				console.log(lines[i]);
-				let output = pyodide.runPython(editor.getValue());
-				addToOutput(output);
-			}
-		}
+		addToOutput(result);
 		
 	} catch (err) {
 		addToOutput(err);
