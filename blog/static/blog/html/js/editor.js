@@ -16,9 +16,9 @@ editor.setValue(`sum([1, 2, 3, 4, 5])`);
 output.value = "Initializing...\n";
 
 async function main() {
-	let pyodide = await loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.18.1/full/" });
+	let pyodide = await loadPyodide({ indexURL: "https://cdn.jsdelivr.net/pyodide/v0.22.1/full/" });
 	// Pyodide ready
-	// output.value += "Ready!\n";
+	output.value += "Ready!\n";
 	return pyodide;
 };
 
@@ -31,14 +31,13 @@ function addToOutput(s) {
 
 async function evaluatePython() {
 
-	// let pyodide = await pyodideReadyPromise;
+	let pyodide = await pyodideReadyPromise;
 	try {
-		// console.log(editor.getValue())
 
 		// split editor value into lines
 		let lines = editor.getValue().split("\n");
 
-		console.log(lines[0]);
+		// console.log(lines[0]);
 
 		let n_lines = lines.length;
 
@@ -63,8 +62,8 @@ async function evaluatePython() {
 				// set the output to the result of the print statement
 				addToOutput(lines[i]);
 			} else {
-				console.log(output);
-				let output = pyodide.runPython(lines[i]);
+				console.log(lines[i]);
+				let output = pyodide.runPython(editor.getValue());
 				addToOutput(output);
 			}
 		}
