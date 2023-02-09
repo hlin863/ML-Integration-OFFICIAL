@@ -12,3 +12,7 @@ Add an input panel for allowing the user to make configurations.
 Determine the downstream tasks
 
 Provide a website for GitHub and Data Repositories. Embed the GitHub repo into the browser. 
+
+Prerequiste: Django
+
+Run the application from the root folder using the instruction: python manage.py runserver
