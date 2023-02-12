@@ -13,6 +13,7 @@
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 	<!-- create a autocomplete function for the textarea with the id "code" -->
 	<script src="js/autocomplete.js"></script>
+	<script src="js/auto_workflow.js"></script>
 </head>
 
 <body>
@@ -28,7 +29,15 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="name">GitHub Location</label>
-						<input type="text" class="form-control" id="name" placeholder="">
+						<input type="text" class="form-control" id="git_link" placeholder="">
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="name">User name</label>
+						<input type="text" class="form-control" id="git_user_name" placeholder="">
 					</div>
 				</div>
 			</div>
@@ -44,7 +53,15 @@
 				<div class="col-md-12">
 					<div class="form-group">
 						<label for="message">Train Script</label>
-						<textarea class="form-control" id="message" rows="3"></textarea>
+						<textarea class="form-control" id="train_script" rows="3"></textarea>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="message">Test Script</label>
+						<textarea class="form-control" id="test_script" rows="3"></textarea>
 					</div>
 				</div>
 			</div>
