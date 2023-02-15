@@ -1,6 +1,0 @@
-Django~=3.0.6
-scikit-learn
-pandas
-matplotlib
-seaborn
-numpy
