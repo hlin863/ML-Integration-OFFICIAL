@@ -14,6 +14,6 @@ def index(request):
 def testbutton(request):
     output = {}
 
-    output["test"] = "test"
+    output['text'] = "Hello World"
 
-    return render(request, 'workflow/workflow.html', output)
+    return render(request, 'workflow/workflow_temp.html', output)
