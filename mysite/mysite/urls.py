@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from workflow import views
 
 urlpatterns = [
     path('', include('workflow.urls')),
-    path('workflow/', include('workflow.urls')),
     path('admin/', admin.site.urls), 
+    path('/index', views.index, name='index'),
+    path('/test', views.testbutton, name='testbutton'),
 ]
