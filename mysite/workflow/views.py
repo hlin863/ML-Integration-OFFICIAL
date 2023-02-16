@@ -1,11 +1,19 @@
 from django.shortcuts import render
+from django_unicorn.components import UnicornView
 
 # Create your views here.
 from django.http import HttpResponse
 
-from .templates import *
+# from .templates import *
 
 def index(request):
-    # return the HTTP response as html code from templates/index.html
-    return render(request, 'workflow/workflow.html')
-    # return HttpResponse("Hello, world. You're at the polls index.")
+    # embed UnicornView in the template
+    return render(request, 'workflow/workflow.html', {'unicorn_view': UnicornView})
+    # return render(request, 'workflow/workflow.html')
+
+def testbutton(request):
+    output = {}
+
+    output["test"] = "test"
+
+    return render(request, 'workflow/workflow.html', output)
