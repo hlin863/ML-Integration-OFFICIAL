@@ -60,6 +60,31 @@
         </div>
     </nav>
 
+	<div class="container" name="workflow-table-section">
+
+		<table name="workflow-table">
+
+			<tr>
+				<th>Task Name</th>
+				<th>Start Time</th>
+				<th>End Time</th>
+				<th>Completed</th>
+			</tr>
+
+			<tr>
+				<td>Task 1</td>
+				<td>Start Time</td>
+				<td>End Time</td>
+				<td>Completed</td>
+			</tr>
+
+		</table>
+
+	</div>
+
+	<!-- create a gap between the 2 sections -->
+	<div class="container" style="height: 50px;"></div>
+
 	<form method="post" action="{% url 'testbutton' %}">
         {% csrf_token %}
 		<div class="row">
