@@ -29,15 +29,19 @@ def testbutton(request):
 
         print("python_file_name: ", python_file_name)
 
-        # display the current working directory
-        print("Current working directory: {0}".format(os.getcwd()))
+        # resets the os directory to the current working directory
+        # check if the current working directory is the same as the templates folder
+        if os.getcwd() != "C:\\Users\\haoch\\OneDrive\\Documents\\UCL\\COMPSI-Yr4\\Final_Year_Project\\OFFICIAL-REPO\\ML-Integration-OFFICIAL\\mysite\\workflow\\templates\Sources":
 
-        # change the current working directory to the templates folder
-        os.chdir("workflow")
+            # display the current working directory
+            print("Current working directory: {0}".format(os.getcwd()))
 
-        os.chdir("templates")
+            # change the current working directory to the templates folder
+            os.chdir("workflow")
 
-        os.chdir("Sources")
+            os.chdir("templates")
+
+            os.chdir("Sources")
 
         # display the current working directory
         print("Current working directory: {0}".format(os.getcwd()))
