@@ -84,7 +84,7 @@
 			<div class="row">
 				<div class="col-md-12">
 
-					<form action = "" method="get">
+					<form action = "{% url 'testbutton' %}" method="get">
 						{% csrf_token %}
 						<button type="submit" class="btn btn-primary" value="run">Submit</button>
 					</form>

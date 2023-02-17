@@ -16,4 +16,4 @@ def testbutton(request):
 
     output['text'] = "Hello World"
 
-    return render(request, 'workflow/workflow_temp.html', output)
+    return render(request, 'workflow/workflow.html', output)

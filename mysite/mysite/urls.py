@@ -18,8 +18,6 @@ from django.urls import include, path
 from workflow import views
 
 urlpatterns = [
-    path('', include('workflow.urls')),
-    path('admin/', admin.site.urls), 
-    path('/index', views.index, name='index'),
-    path('/test', views.testbutton, name='testbutton'),
+    path('', include('workflow.urls')), # workflow app
+    path('admin/', admin.site.urls), # admin site
 ]
