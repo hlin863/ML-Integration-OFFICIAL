@@ -28,77 +28,36 @@
         </div>
     </nav>
 
-    <div class="user-input-form bg-light">
-		<h1 class="text-center">
-			Workflow Form
-		</h1>
+	<form method="post" action="{% url 'testbutton' %}">
+        {% csrf_token %}
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12">
-					<div class="form-group">
-						<label for="name">GitHub Location</label>
-						<input type="text" name = "git_link" class="form-control" id="git_link" placeholder="" aria-label="git_link">
-					</div>
+					<label for="name">GitHub Location</label>
+        			<input type="text" name="git_link" placeholder="Please enter your GitHub Link">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="form-group">
-						<label for="name">User name</label>
-						<input type="text" class="form-control" id="git_user_name" placeholder="" aria-label="git_user_name">
-					</div>
+					<label for="pwd">Password</label>
+					<input type="password" name="pwd" placeholder="Please enter a password">
 				</div>
 			</div>
 			<div class="row">
 				<div class="col-md-12">
-					<div class="form-group">
-						<label for="name">Data Location</label>
-						<input type="text" class="form-control" id="data_location" placeholder="" aria-label="data_location">
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-						<label for="message">Train Script</label>
-						<textarea class="form-control" id="train_script" rows="3" aria-label="train_script"></textarea>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-						<label for="message">Test Script</label>
-						<textarea class="form-control" id="test_script" rows="3" aria-label="test_script"></textarea>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group">
-						<label for="email">Email</label>
-						<input type="email" class="form-control" id="email" placeholder="Enter your email" aria-label="email">
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12">
-
-					<form action = "{% url 'testbutton' %}" method="get">
-						{% csrf_token %}
-						<button type="submit" class="btn btn-primary" value="run">Submit</button>
-					</form>
+					<input type="submit" value="Submit">
 				</div>
 			</div>
 		</div>
-		
+    </form>
+
+	<div>
+
+		{{name}}
+
+		{{pwd}}
+
 	</div>
-
-	<!-- <div>
-
-		<p>{{text}}</p>
-
-	</div> -->
 
 </body>
 </html>

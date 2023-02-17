@@ -12,13 +12,21 @@ def index(request):
     # return render(request, 'workflow/workflow.html')
 
 def testbutton(request):
-    output = {}
+    if request.method == 'POST':
+        
+        username = request.POST.get('git_link')
 
-    github_url = request.GET.get('git_link')
+        password = request.POST.get('pwd')
 
-    output['text'] = github_url
+        output = {'name': username, 'pwd': password}
+
+        print("username: ", username)
+
+        print("password: ", password)
+
+        return render(request, 'workflow/workflow.html', output)
 
     # return the HTTPResponse object as the workflow.html template after update
-    return HttpResponse(output['text'])
+    return render(request, 'workflow/workflow.html')
 
     # return render(request, 'workflow/testfolder/workflow_temp.html', output)
