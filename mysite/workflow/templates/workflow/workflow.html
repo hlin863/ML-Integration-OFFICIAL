@@ -64,19 +64,22 @@
 
 		<table name="workflow-table">
 
+			{% for workflow in workflows %}
 			<tr>
-				<th>Task Name</th>
-				<th>Start Time</th>
-				<th>End Time</th>
-				<th>Completed</th>
+				<td>
+					{{workflow.name}}
+				</td>
+				<td>
+					{{workflow.start_time}}
+				</td>
+				<td>
+					{{workflow.end_time}}
+				</td>
+				<td>
+					{{workflow.status}}
+				</td>
 			</tr>
-
-			<tr>
-				<td>Task 1</td>
-				<td>Start Time</td>
-				<td>End Time</td>
-				<td>Completed</td>
-			</tr>
+			{% endfor %}
 
 		</table>
 

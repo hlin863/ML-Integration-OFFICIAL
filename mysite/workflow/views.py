@@ -6,6 +6,10 @@ from django.http import HttpResponse
 
 from .templates.Sources import *
 import os
+# import datetime
+import datetime
+
+from .models import WorkFlowData
 
 # from .templates import *
 
@@ -48,6 +52,23 @@ def testbutton(request):
 
         os.system("python " + python_file_name)
 
+        # get the current time
+        current_time = datetime.datetime.now()
+
+        # print the current time
+        print("Current time: ", current_time)
+
+        table_model = WorkFlowData(task_name="", start_time=current_time, end_time=current_time, completed="True")
+        
+        # insert the row "table_model" into the table "WorkFlowData"
+        print("table_model: ", table_model.task_name)
+
+        table_model.save()
+
+        workflows = WorkFlowData.objects.all().values()
+
+        output['workflows'] = workflows
+        
         # print("password: ", password)
 
         return render(request, 'workflow/workflow.html', output)
