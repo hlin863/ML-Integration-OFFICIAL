@@ -18,7 +18,7 @@ def testbutton(request):
 
         password = request.POST.get('pwd')
 
-        output = {'name': username, 'pwd': password}
+        output = {'name': username}
 
         print("username: ", username)
 
