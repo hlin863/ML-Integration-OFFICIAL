@@ -14,6 +14,8 @@ def index(request):
 def testbutton(request):
     output = {}
 
-    output['text'] = "Hello World"
+    github_link = request.GET.get('git_link')
 
-    return render(request, 'workflow/workflow.html', output)
+    output['text'] = github_link
+
+    return render(request, 'workflow/testfolder/workflow_temp.html', output)
