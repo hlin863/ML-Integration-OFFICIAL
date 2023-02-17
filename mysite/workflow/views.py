@@ -14,8 +14,11 @@ def index(request):
 def testbutton(request):
     output = {}
 
-    github_link = request.GET.get('git_link')
+    github_url = request.GET.get('git_link')
 
-    output['text'] = github_link
+    output['text'] = github_url
 
-    return render(request, 'workflow/testfolder/workflow_temp.html', output)
+    # return the HTTPResponse object as the workflow.html template after update
+    return HttpResponse(output['text'])
+
+    # return render(request, 'workflow/testfolder/workflow_temp.html', output)

@@ -8,5 +8,5 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('', views.index, name='index'), # workflow index
-    path('testfolder/', views.testbutton, name='testbutton'), # workflow testbutton
+    path('testfolder', views.testbutton, name='testbutton'), # workflow testbutton
 ]

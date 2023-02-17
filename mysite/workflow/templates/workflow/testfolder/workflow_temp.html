@@ -38,7 +38,7 @@
 					<div class="form-group">
 						<label for="name">GitHub Location</label>
 						<form method="get" action = "url 'testbutton' %}">
-							<input type="text" name = "git_link" class="form-control" id="git_link" placeholder="" aria-label="git_link">
+							<input type="text" name = "git_link" class="form-control" id="git_link" placeholder="Please enter a GitHub Link." aria-label="git_link">
 						</form>
 					</div>
 				</div>
@@ -86,10 +86,14 @@
 			<div class="row">
 				<div class="col-md-12">
 
-					<form action = "{% url 'testbutton' %}" method="get">
+					<a target="_blank" href="{% url 'testbutton' %}" button type="submit" class="btn btn-primary" value="run">
+						Submit
+					</a>
+
+					<!-- <form action = "{% url 'testbutton' %}" method="get">
 						{% csrf_token %}
 						<button type="submit" class="btn btn-primary" value="run">Submit</button>
-					</form>
+					</form> -->
 				</div>
 			</div>
 		</div>
