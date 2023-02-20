@@ -50,15 +50,19 @@ def testbutton(request):
         # display the current working directory
         print("Current working directory: {0}".format(os.getcwd()))
 
-        os.system("python " + python_file_name)
-
         # get the current time
-        current_time = datetime.datetime.now()
+        start_time = datetime.datetime.now()
 
         # print the current time
-        print("Current time: ", current_time)
+        print("Current time: ", start_time)
 
-        table_model = WorkFlowData(task_name="", start_time=current_time, end_time=current_time, completed="True")
+        os.system("python " + python_file_name)
+        
+        # get the time after the python file has been executed
+        end_time = datetime.datetime.now()
+        print("Current time: ", end_time)
+
+        table_model = WorkFlowData(task_name=python_file_name, start_time=start_time, end_time=end_time, completed="True")
         
         # insert the row "table_model" into the table "WorkFlowData"
         print("table_model: ", table_model.task_name)
