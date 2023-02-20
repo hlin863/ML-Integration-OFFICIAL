@@ -69,6 +69,8 @@ y_pred = regr.predict(X_test) + np.random.normal(0,0.25,len(y_test))
 y_jitter = y_test + np.random.normal(0,0.25,len(y_test))
 res_df = pd.DataFrame(list(zip(y_jitter,y_pred)), columns = ["true","pred"])
 
+print("Hello World?")
+
 ax = sns.scatterplot(x="true", y="pred",data=res_df)
 ax.set_aspect('equal')
 ax.set_xlabel('True wine quality',fontsize = axis_fs) 

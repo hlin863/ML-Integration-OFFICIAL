@@ -18,6 +18,45 @@ def index(request):
     return render(request, 'workflow/workflow.html', {'unicorn_view': UnicornView})
     # return render(request, 'workflow/workflow.html')
 
+def timestamp(request):
+    # embed UnicornView in the template
+    # automatically check if the python files in the Sources folder have been updated and get its time stamps
+    # if the python files have been updated, then update the database
+    # if the python files have not been updated, then do not update the database
+    if os.getcwd() != "C:\\Users\\haoch\\OneDrive\\Documents\\UCL\\COMPSI-Yr4\\Final_Year_Project\\OFFICIAL-REPO\\ML-Integration-OFFICIAL\\mysite\\workflow\\templates\Sources":
+
+        # display the current working directory
+        print("Current working directory: {0}".format(os.getcwd()))
+
+        # change the current working directory to the templates folder
+        os.chdir("workflow")
+
+        os.chdir("templates")
+
+        os.chdir("Sources")
+
+    # display the files in the Sources folder
+    print("Files in Sources folder: ", os.listdir())
+
+    # initialise the time when the website loaded up to compare with the last modified time of the python files
+    application_time = datetime.datetime.now()
+
+    # iterate through the files in the Sources folder
+    for file in os.listdir():
+
+        # check their last modified time
+        # print("Last modified time: ", datetime.datetime.fromtimestamp(os.path.getmtime(file)))
+
+        timestamp_time = datetime.datetime.fromtimestamp(os.path.getmtime(file))
+
+        if timestamp_time > application_time:
+
+            print("File: ", file)
+
+            print("Last modified time: ", timestamp_time.time())
+
+    return render(request, 'workflow/workflow.html', {'unicorn_view': UnicornView})
+    
 def testbutton(request):
     if request.method == 'POST':
         
@@ -54,13 +93,13 @@ def testbutton(request):
         start_time = datetime.datetime.now()
 
         # print the current time
-        print("Current time: ", start_time)
+        print("Start time: ", start_time)
 
         os.system("python " + python_file_name)
         
         # get the time after the python file has been executed
         end_time = datetime.datetime.now()
-        print("Current time: ", end_time)
+        print("End time: ", end_time)
 
         table_model = WorkFlowData(task_name=python_file_name, start_time=start_time, end_time=end_time, completed="True")
         

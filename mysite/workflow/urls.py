@@ -9,4 +9,5 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', views.index, name='index'), # workflow index
     path('test', views.testbutton, name='testbutton'), # workflow testbutton
+    path('timestamp', views.timestamp, name='timestamp'), # workflow timestamp
 ]

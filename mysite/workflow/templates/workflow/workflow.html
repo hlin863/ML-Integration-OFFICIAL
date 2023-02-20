@@ -130,6 +130,11 @@
 		</div>
     </form>
 
+	<form method="post" action="{% url 'timestamp' %}">
+		{% csrf_token %}
+		<input type="submit" value="Check Status">
+	</form>
+
 	<div>
 
 		<label for="name">GitHub Link</label> {{name}} <br>
