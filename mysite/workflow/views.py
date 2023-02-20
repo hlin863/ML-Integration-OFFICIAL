@@ -49,11 +49,28 @@ def timestamp(request):
 
         timestamp_time = datetime.datetime.fromtimestamp(os.path.getmtime(file))
 
-        if timestamp_time > application_time:
+        # check if the year of the last modified time is greater than the year of the time when the website loaded up
+        if timestamp_time.year >= application_time.year:
 
-            print("File: ", file)
+            if timestamp_time.month >= application_time.month:
 
-            print("Last modified time: ", timestamp_time.time())
+                # print("Test")
+
+                if timestamp_time.day >= application_time.day:
+
+                    if timestamp_time.hour >= application_time.hour:
+
+                        print("File: ", file)
+
+                        print("Last modified time: ", timestamp_time.time())  
+
+                        os.system("python " + file)      
+
+        # if timestamp_time > application_time:
+
+        #     print("File: ", file)
+
+        #     print("Last modified time: ", timestamp_time.time())
 
     return render(request, 'workflow/workflow.html', {'unicorn_view': UnicornView})
     
