@@ -82,7 +82,7 @@
 			{% for workflow in workflows %}
 			<tr>
 				<td>
-					{{workflow.name}}
+					{{workflow.task_name}}
 				</td>
 				<td>
 					{{workflow.start_time}}
@@ -91,7 +91,7 @@
 					{{workflow.end_time}}
 				</td>
 				<td>
-					{{workflow.status}}
+					{{workflow.completed}}
 				</td>
 			</tr>
 			{% endfor %}
