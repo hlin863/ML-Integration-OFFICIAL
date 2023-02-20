@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django_unicorn.components import UnicornView
+from django.core.mail import send_mail
 
 # Create your views here.
 from django.http import HttpResponse
@@ -81,6 +82,8 @@ def testbutton(request):
 
         python_file_name = request.POST.get('python_file')
 
+        user_email = request.POST.get('user_email')
+
         password = request.POST.get('pwd')
 
         output = {'name': username}
@@ -130,6 +133,14 @@ def testbutton(request):
         output['workflows'] = workflows
         
         # print("password: ", password)
+
+        send_mail(
+            'Your workflow has been completed',
+            'Here is the message.',
+            'from@example.com',
+            [user_email],
+            fail_silently=False,
+        )
 
         return render(request, 'workflow/workflow.html', output)
 
