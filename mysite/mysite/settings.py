@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+from celery.schedules import crontab # import crontab to schedule tasks
 from pathlib import Path
 import os
 
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # 'django_celery_monitor',
     'workflow',
 ]
 
@@ -129,6 +130,15 @@ CELERY_TIMEZONE = "UTC"
 CELERY_TASK_TRACK_STARTED = True
 
 CELERY_TASK_TIME_LIMIT = 30 * 60
+
+CELERY_ENABLE_UTC = True
+
+CELERY_BEAT_SCHEDULE = {
+    'send-updates-every-5-minutes':{
+        'task': 'workflow.tasks.send_updates',
+        'schedule': crontab(minute='*/5'),
+    }
+}
 
 # add configuration for sending email
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
