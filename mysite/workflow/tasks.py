@@ -4,6 +4,7 @@ from celery import Celery
 from celery import task
 from celery.utils.log import get_task_logger
 
+from models import ConfigurationForm
 from django.core.mail import send_mail, BadHeaderError
 from mysite.settings import DEFAULT_FROM_EMAIL
 import os
@@ -22,6 +23,18 @@ def send_email_task(subject, message, from_email, recipient_list):
     except BadHeaderError:
         return 'Invalid header found.'
     return None
+
+def get_current_results(output_file):
+
+    # parse the file to get the results
+    with open(output_file, 'r') as f:
+        results = f.read()
+
+    # store the file in the database.
+
+
+    return results
+
 
 def github_repo_updated(github_repo):
     """
@@ -99,23 +112,20 @@ def data_files_updated(data_files):
             return False
 
 @task(name="send_updates")
-def send_updates(github_repo, data_files, training_script):
+def send_updates(config_db):
     """
     
     1. Check if the github repo or the data files have been updated in the last 5 minutes.
     
     Parameters
     ----------
-    github_repo : str
-        The github repo to check for updates.
-    
-    data_files : list
-        A list of data files to check for updates.
-    
-    training_script : str
-        The python training code to run when the github repo or the data files have been updated for the ML training.
+    gconfig_db: database key
+        The database key for the config_db database for the row in the database. 
 
     """
+    # allows the user to get the previous results. 
+    config_dict = ConfigurationForm.get(config_db)
+
     print("Sending updates")
     # check if the github repo or the data files have been updated. 
     if github_repo_updated(github_repo) or data_files_updated(data_files):
@@ -149,10 +159,10 @@ def send_updates(github_repo, data_files, training_script):
             # produce a file that contains the results of the ML training. 
             
             # 1. getting the data from the previous ML training process
-            previous_results = get_previous_results()
+            previous_results = config_db.previous_results
 
             # 2. getting the data from the current ML training process
-            current_results = get_current_results()
+            current_results = get_current_results(output_file)
 
             # 3. comparing the results from the previous ML training process and the current ML training process
             if current_results < previous_results:
