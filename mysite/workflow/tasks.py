@@ -12,6 +12,10 @@ import requests
 import datetime
 from subprocess import Popen, PIPE
 
+# import the temproary directory
+import tempfile
+import shutil
+
 app = Celery('github_tasks',broker='amqp://guest:guest@localhost:5672//')
 
 logger = get_task_logger(__name__)
@@ -72,6 +76,26 @@ def github_repo_updated(github_repo):
         return True
     else:
         return False
+    
+def fetch_data_file(data_file):
+    """
+    
+    This function fetches the data file from the data file url.
+
+    Parameters
+    ----------
+    data_file : str
+        The url of the data file to fetch.
+
+    Returns
+    -------
+
+    """
+    # copy file location to the current working directory
+    shutil.copy(data_file, os.getcwd())
+
+
+
 
 def data_files_updated(data_files):
     """
@@ -126,22 +150,36 @@ def send_updates(config_db):
     # allows the user to get the previous results. 
     config_dict = ConfigurationForm.get(config_db)
 
+    github_repo = config_dict['github_repo']
+
+    data_files = config_dict['data_files'] # directory of the data files
+
+    training_script = config_dict['training_script']
+
+    output_file = config_dict['output_file']
+
     print("Sending updates")
     # check if the github repo or the data files have been updated. 
     if github_repo_updated(github_repo) or data_files_updated(data_files):
         print("Checking whether repo or data has been updated.")
 
-        if os.getcwd() != "C:\\Users\\haoch\\OneDrive\\Documents\\UCL\\COMPSI-Yr4\\Final_Year_Project\\OFFICIAL-REPO\\ML-Integration-OFFICIAL\\mysite\\workflow\\templates\Sources":
+        # if os.getcwd() != "C:\\Users\\haoch\\OneDrive\\Documents\\UCL\\COMPSI-Yr4\\Final_Year_Project\\OFFICIAL-REPO\\ML-Integration-OFFICIAL\\mysite\\workflow\\templates\Sources":
 
-            # display the current working directory
-            print("Current working directory: {0}".format(os.getcwd()))
+        #     # display the current working directory
+        #     print("Current working directory: {0}".format(os.getcwd()))
 
-            # change the current working directory to the templates folder
-            os.chdir("workflow")
+        #     # change the current working directory to the templates folder
+        #     os.chdir("workflow")
 
-            os.chdir("templates")
+        #     os.chdir("templates")
 
-            os.chdir("Sources")
+        #     os.chdir("Sources")
+
+        # define a temporary working directory
+        temp_directory = tempfile.TemporaryDirectory()
+
+        # change the current working directory to the temporary working directory
+        os.chdir(temp_directory.name)
 
         # display the files in the Sources folder
         print("Files in Sources folder: ", os.listdir())
@@ -149,7 +187,7 @@ def send_updates(config_db):
         # fetch the github repo code file and the data files. 
         github_repo_code = requests.get(github_repo)
 
-        data_files = [fetch_data_file(data_file) for data_file in data_files]
+        data_files = fetch_data_file(data_files)
 
         # run the training script
         if Popen(training_script, shell=True, stdout=PIPE, stderr=PIPE) == 0:
@@ -177,3 +215,5 @@ def send_updates(config_db):
             # send an email to the user
             send_email_task("ML Training Failed", "The ML training failed. Please check the training script.", DEFAULT_FROM_EMAIL, [""])
 
+            # destroy the temp directory
+            temp_directory.cleanup()
