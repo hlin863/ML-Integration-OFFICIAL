@@ -38,3 +38,14 @@ class WorkFlowData(models.Model):
 
     def __str__(self):
         return self.task_name
+    
+class ConfigurationForm(models.Model):
+    github_link = models.CharField(max_length=200)
+    user_email = models.EmailField(max_length=200)
+    data_location = models.CharField(max_length=200)
+    python_script = models.CharField(max_length=200)
+    output_file = models.CharField(max_length=200)
+    previous_performance = models.FloatField()
+
+    
+    
