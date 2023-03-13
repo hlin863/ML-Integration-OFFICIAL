@@ -137,7 +137,7 @@ def testbutton(request):
         send_mail(
             'Your workflow has been completed',
             'Here is the message.',
-            'from@example.com',
+            'haochenglin789@gmail.com',
             [user_email],
             fail_silently=False,
         )
