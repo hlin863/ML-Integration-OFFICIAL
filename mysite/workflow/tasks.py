@@ -15,6 +15,7 @@ from subprocess import Popen, PIPE
 # import the temproary directory
 import tempfile
 import shutil
+import zipfile
 
 app = Celery('github_tasks',broker='amqp://guest:guest@localhost:5672//')
 
@@ -77,7 +78,7 @@ def github_repo_updated(github_repo):
     else:
         return False
     
-def fetch_data_file(data_file):
+def fetch_data_file(data_file, unzip_location):
     """
     
     This function fetches the data file from the data file url.
@@ -86,11 +87,23 @@ def fetch_data_file(data_file):
     ----------
     data_file : str
         The url of the data file to fetch.
+    unzip_location : str
+        The location to unzip the data file to.
 
     Returns
     -------
 
     """
+    # check if the data type is file or from a url
+    if data_file.startswith("http"):
+        print("The data file is from a url.")
+    # otherwise if the data file is a path.
+    elif data_file.startswith("C:\\"):
+        path = data_file
+        print("The data file is a path.")
+        with zipfile.ZipFile(path, 'r') as zip_ref:
+            zip_ref.extractall(unzip_location)
+
     # copy file location to the current working directory
     shutil.copy(data_file, os.getcwd())
 
@@ -158,6 +171,8 @@ def send_updates(config_db):
 
     output_file = config_dict['output_file']
 
+    unzip_location = config_dict['unzip_location']
+
     print("Sending updates")
     # check if the github repo or the data files have been updated. 
     if github_repo_updated(github_repo) or data_files_updated(data_files):
@@ -184,10 +199,25 @@ def send_updates(config_db):
         # display the files in the Sources folder
         print("Files in Sources folder: ", os.listdir())
 
-        # fetch the github repo code file and the data files. 
-        github_repo_code = requests.get(github_repo)
+        # fetch the github repo code file and the data files as a zip file.
+        github_repo_zip = f'{requests.get(github_repo)}/archive/refs/head/main.zip'
 
-        data_files = fetch_data_file(data_files)
+        # use request.get to fetch the zip file from the github repo
+        zip_request = requests.get(github_repo_zip)
+
+        # opens the zip file for processing. 
+        fhOut = open("github_repo.zip", "b")
+
+        # check the status code of the request
+        if zip_request.status_code == 200:
+
+            # if the status code is 200, write the content of the request to the zip file
+            fhOut.write(zip_request.content)
+
+        # close the zip file
+        fhOut.close()
+
+        data_files = fetch_data_file(data_files, unzip_location)
 
         # run the training script
         if Popen(training_script, shell=True, stdout=PIPE, stderr=PIPE) == 0:
