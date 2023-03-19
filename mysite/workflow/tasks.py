@@ -17,6 +17,9 @@ import tempfile
 import shutil
 import zipfile
 
+# import pandas for data analysis and processing
+import pandas as pd
+
 app = Celery('github_tasks',broker='amqp://guest:guest@localhost:5672//')
 
 logger = get_task_logger(__name__)
@@ -29,14 +32,26 @@ def send_email_task(subject, message, from_email, recipient_list):
         return 'Invalid header found.'
     return None
 
-def get_current_results(output_file):
+def get_current_results(output_file, temp_dir):
+    """
+    
+    This function loads the current results from the data output_file and stores them in the temp directory.
+
+    Parameters
+    ----------
+    output_file : str
+        The output file to load the results from.
+    temp_dir : str
+        The temporary directory to store the results in.
+    """
+    
 
     # parse the file to get the results
     with open(output_file, 'r') as f:
         results = f.read()
 
-    # store the file in the database.
-
+    # store the file in the temp directory
+    
 
     return results
 
@@ -95,14 +110,25 @@ def fetch_data_file(data_file, unzip_location):
 
     """
     # check if the data type is file or from a url
-    if data_file.startswith("http"):
+    if data_file.startswith("http") or data_file.startswith("https"):
         print("The data file is from a url.")
+        data_request = requests.get(data_file) # get the data file from the url
+
+        return data_request.content # return the data file content
+
     # otherwise if the data file is a path.
     elif data_file.startswith("C:\\"):
         path = data_file
         print("The data file is a path.")
         with zipfile.ZipFile(path, 'r') as zip_ref:
             zip_ref.extractall(unzip_location)
+
+        # load the data fro the directory after extracting the zip file
+        # if the data is a type csv file
+        if data_file.endswith(".csv"):
+            data = pd.read_csv(data_file)
+
+            return data
 
     # copy file location to the current working directory
     shutil.copy(data_file, os.getcwd())
@@ -230,7 +256,7 @@ def send_updates(config_db):
             previous_results = config_db.previous_results
 
             # 2. getting the data from the current ML training process
-            current_results = get_current_results(output_file)
+            current_results = get_current_results(output_file, temp_directory)
 
             # 3. comparing the results from the previous ML training process and the current ML training process
             if current_results < previous_results:
