@@ -52,6 +52,15 @@ class TrainingViewTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, "Model Training Runs")
 
+    def test_repository_selection_page_loads(self):
+        response = self.client.get(reverse("ml_pipeline:repository_selection"))
+
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, "Watch Repository")
+        self.assertContains(response, "Public GitHub repository URL")
+        self.assertContains(response, "Dataset paths to watch")
+        self.assertContains(response, "Training/test command")
+
 
 def _write_dataset(path):
     rows = []

@@ -1,0 +1,86 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<section class="mb-4">
+    <div class="d-flex align-items-center justify-content-between mb-3">
+        <div>
+            <h2 class="mb-1">Watch Repository</h2>
+            <p class="text-muted mb-0">Configure a public GitHub repository for ML model CI.</p>
+        </div>
+        <a href="{% url 'ml_pipeline:training_runs' %}" class="btn btn-outline-secondary btn-sm">Training Runs</a>
+    </div>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags|default:'info' }}" role="alert">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="post" class="card shadow-sm border-0">
+        {% csrf_token %}
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    {{ form.repository_url.label_tag }}
+                    {{ form.repository_url }}
+                    {{ form.repository_url.errors }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.branch.label_tag }}
+                    {{ form.branch }}
+                    {{ form.branch.errors }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ form.dataset_paths.label_tag }}
+                {{ form.dataset_paths }}
+                {{ form.dataset_paths.errors }}
+            </div>
+
+            <div class="form-row">
+                <div class="form-group col-md-8">
+                    {{ form.training_command.label_tag }}
+                    {{ form.training_command }}
+                    {{ form.training_command.errors }}
+                </div>
+                <div class="form-group col-md-4">
+                    {{ form.metric_threshold.label_tag }}
+                    {{ form.metric_threshold }}
+                    {{ form.metric_threshold.errors }}
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-primary">Preview configuration</button>
+            </div>
+        </div>
+    </form>
+</section>
+
+{% if preview %}
+<section class="mb-4">
+    <h3 class="h5">Configuration Preview</h3>
+    <dl class="row bg-light border rounded p-3 mb-0">
+        <dt class="col-sm-4">Repository</dt>
+        <dd class="col-sm-8">{{ preview.repository_url }}</dd>
+
+        <dt class="col-sm-4">Branch</dt>
+        <dd class="col-sm-8">{{ preview.branch }}</dd>
+
+        <dt class="col-sm-4">Dataset paths</dt>
+        <dd class="col-sm-8">{{ preview.dataset_paths|linebreaksbr }}</dd>
+
+        <dt class="col-sm-4">Command</dt>
+        <dd class="col-sm-8"><code>{{ preview.training_command }}</code></dd>
+
+        <dt class="col-sm-4">Minimum metric</dt>
+        <dd class="col-sm-8">{{ preview.metric_threshold|default:"-" }}</dd>
+    </dl>
+</section>
+{% endif %}
+{% endblock %}
+
+{% block home_sections %}{% endblock %}

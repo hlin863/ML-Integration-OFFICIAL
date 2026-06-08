@@ -24,6 +24,9 @@
               <a class="nav-link" href="{% url 'ml_pipeline:training_runs' %}">Training Runs</a>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="{% url 'ml_pipeline:repository_selection' %}">Watch Repository</a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href={% static "blog/html/build.html" %}>Editor</a> 
               <!-- change to build_temp for the work flow table -->
             </li>
@@ -62,6 +65,7 @@
             </div>
         </div>
     </div>
+    {% block home_sections %}
     <section id="intro">
         <div class="container">
             <div class="row">
@@ -160,6 +164,7 @@
             </a>
         </li>
     </div>
+    {% endblock %}
 </body>
 
 </html>

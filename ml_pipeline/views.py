@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.shortcuts import redirect, render
 from django.views.decorators.http import require_POST
 
+from .forms import RepositorySelectionForm
 from .models import TrainingRun
 from .services.version_control import current_git_sha
 from .tasks import train_model_task
@@ -16,6 +17,24 @@ def training_runs(request):
         {
             "runs": runs,
             "default_dataset_path": settings.ML_DATASET_PATH,
+        },
+    )
+
+
+def repository_selection(request):
+    form = RepositorySelectionForm(request.POST or None)
+    preview = None
+
+    if request.method == "POST" and form.is_valid():
+        preview = form.cleaned_data
+        messages.success(request, "Repository configuration validated.")
+
+    return render(
+        request,
+        "ml_pipeline/repository_selection.html",
+        {
+            "form": form,
+            "preview": preview,
         },
     )
 
