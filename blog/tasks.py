@@ -1,7 +1,6 @@
 from celery import shared_task
 
-# import Widget model
-from .models import Widget
+from .models import Post
 
 @shared_task
 def add(x, y):
@@ -19,13 +18,25 @@ def xsum(numbers):
 
 
 @shared_task
+def count_posts():
+    return Post.objects.count()
+
+
+@shared_task
+def rename_post(post_id, title):
+    post = Post.objects.get(id=post_id)
+    post.title = title
+    post.save(update_fields=["title"])
+
+
+@shared_task
 def count_widgets():
-    return Widget.objects.count()
+    return Post.objects.count()
 
 
 @shared_task
 def rename_widget(widget_id, name):
-    w = Widget.objects.get(id=widget_id)
-    w.name = name
-    w.save()
+    post = Post.objects.get(id=widget_id)
+    post.title = name
+    post.save(update_fields=["title"])
 

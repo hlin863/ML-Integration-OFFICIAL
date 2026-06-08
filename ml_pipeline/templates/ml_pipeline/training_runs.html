@@ -1,0 +1,68 @@
+{% extends "blog/base.html" %}
+
+{% block content %}
+<section class="mb-4">
+    <h2>Model Training Runs</h2>
+    <p>
+        Queue wine-quality model training through Celery and keep the run status,
+        Git revision, metrics, and generated artifact paths in Django.
+    </p>
+    <form method="post" action="{% url 'ml_pipeline:enqueue_training_run' %}" class="mb-3">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="dataset_path">Dataset path</label>
+            <input
+                id="dataset_path"
+                name="dataset_path"
+                type="text"
+                class="form-control"
+                value="{{ default_dataset_path }}"
+            >
+        </div>
+        <button type="submit" class="btn btn-primary">Queue training run</button>
+    </form>
+</section>
+
+<section>
+    <h3>Recent Runs</h3>
+    {% if runs %}
+        <div class="table-responsive">
+            <table class="table table-sm table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Status</th>
+                        <th>Git SHA</th>
+                        <th>Dataset</th>
+                        <th>Metrics</th>
+                        <th>Created</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for run in runs %}
+                        <tr>
+                            <td>{{ run.id }}</td>
+                            <td>{{ run.get_status_display }}</td>
+                            <td>{{ run.git_sha|default:"-" }}</td>
+                            <td>{{ run.dataset_path }}</td>
+                            <td>
+                                {% if run.metrics %}
+                                    train {{ run.metrics.training_variance_explained }}%,
+                                    test {{ run.metrics.test_variance_explained }}%
+                                {% elif run.error_message %}
+                                    {{ run.error_message }}
+                                {% else %}
+                                    -
+                                {% endif %}
+                            </td>
+                            <td>{{ run.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>No training runs yet.</p>
+    {% endif %}
+</section>
+{% endblock %}

@@ -1,8 +1,14 @@
-FROM python:3
-ENV PYTHONUNBUFFERED 1
-RUN mkdir /code
+FROM python:3.12-slim
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
 WORKDIR /code
-ADD requirements.txt /code/
-RUN pip install -r requirements.txt
-ADD . /code/
-CMD sh init.sh && python3 manage.py runserver 0.0.0.0:8000
+
+COPY requirements.txt /code/
+RUN pip install --no-cache-dir --upgrade pip \
+    && pip install --no-cache-dir -r requirements.txt
+
+COPY . /code/
+
+CMD ["sh", "init.sh"]

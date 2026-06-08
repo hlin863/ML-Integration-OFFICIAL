@@ -20,13 +20,22 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'n069kq!wejc&v9mv8v9!bruaxqop$zyov&k#8q)m+s+u#jnh)e'
+SECRET_KEY = os.environ.get(
+    'DJANGO_SECRET_KEY',
+    'n069kq!wejc&v9mv8v9!bruaxqop$zyov&k#8q)m+s+u#jnh)e',
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True').lower() == 'true'
 
-ALLOWED_HOSTS = ['127.0.0.1', '0.0.0.0',
-                 '.pythonanywhere.com', '.herokuapp.com']
+ALLOWED_HOSTS = [
+    host.strip()
+    for host in os.environ.get(
+        'DJANGO_ALLOWED_HOSTS',
+        '127.0.0.1,localhost,0.0.0.0,.pythonanywhere.com,.herokuapp.com',
+    ).split(',')
+    if host.strip()
+]
 
 
 # Application definition
@@ -38,7 +47,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog',
+    'blog.apps.BlogConfig',
+    'ml_pipeline.apps.MlPipelineConfig',
     'django_celery_results',
 ]
 
@@ -108,11 +118,9 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Africa/Nairobi'
+TIME_ZONE = os.environ.get('TIME_ZONE', 'Europe/London')
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 
@@ -121,10 +129,31 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'blog/static') # change static to /blog/static
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-CELERY_TIMEZONE = 'Africa/Nairobi'
+DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = os.environ.get(
+    'CELERY_BROKER_URL',
+    'amqp://guest:guest@localhost:5672//',
+)
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_CACHE_BACKEND = 'default'
+CELERY_TIMEZONE = TIME_ZONE
 
 CELERY_TASK_TRACK_STARTED = True
 
 CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_TASK_ALWAYS_EAGER = os.environ.get(
+    'CELERY_TASK_ALWAYS_EAGER',
+    'False',
+).lower() == 'true'
+
+ML_DATASET_PATH = os.environ.get(
+    'ML_DATASET_PATH',
+    os.path.join(BASE_DIR, 'wine_quality.csv'),
+)
+ML_ARTIFACT_DIR = os.environ.get(
+    'ML_ARTIFACT_DIR',
+    os.path.join(BASE_DIR, 'artifacts', 'ml'),
+)

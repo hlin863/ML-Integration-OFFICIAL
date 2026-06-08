@@ -105,6 +105,11 @@ myvenv
 .mypy_cache/
 
 /static
+staticfiles/
+artifacts/
+metrics.txt
+feature_importance.png
+residuals.png
 .DS_Store
 
 # Editor files
